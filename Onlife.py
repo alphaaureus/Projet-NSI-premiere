@@ -60,17 +60,21 @@ listecollege=["Collège Chaptal","Collège Plaisance","Collège Jean Giono","Col
 listelycee=["Lycée Jean Rostand","Lycée Henri Vincenot","Lycée Camille Claudel","Lycée Pasteur","Lycée Gustave Eiffel","Lycée Voltaire","Lycée Parc des Loges","Lycée Martin Luther King","Lycée Honoré Romane","Lycée Jean Monnet"]
 listeuniversite=["Commerce","Ingénieur","Lettres","Arts","Politique","Sc.Sociales","Droit","Architecture","Médecine"]
 dicometiers=["Commerce1","Commerce2","Commerce3","Commerce4","Commerce5","Ingénieur1","Ingénieur2","Ingénieur3","Ingénieur4","Ingénieur5","Lettres1","Lettres2","Lettres3","Lettres4","Lettres5","Arts1","Arts2","Arts3","Arts4","Arts5","Politique1","Politique2","Politique3","Politique4","Politique5","Sc.Sociales1","Sc.Sociales2","Sc.Sociales3","Sc.Sociales4","Sc.Sociales5","Droit1","Droit2","Droit3","Droit4","Droit5","Architecture1","Architecture2","Architecture3","Architecture4","Architecture5","Médecine1","Médecine2","Médecine3","Médecine4","Médecine5"]
+listedomicile=["Studio1","Studio2","Studio3","Studio4","Studio5","Appartement1","Appartement2","Appartement3","Appartement4","Appartement5","Maison1","Maison2","Maison1","Maison2","Maison3","Maison4","Maison5","Villa1","Villa2""Villa3""Villa4""Villa5"]
+listetransport=[]
+listeanimal=[]
+
 
 # Code pour faire tourner la fonction menu pour choisir le sexe
-def start_the_game():
+def sexe():
     pygame.init()
     ecran = pygame_menu.Menu(800, 1200, 'ONLIFE',theme=mytheme)
     genre = ecran.add_image('femmehomme.png')
     femme = ecran.add_button('Femme',principal_femme)
     homme = ecran.add_button('Homme',principal_homme)
-    ecran.add_button('Retour',__intit__)
+    ecran.add_button('Retour',depart)
     ecran.mainloop(fenetre)
-    return start_the_game
+    return sexe
 
 
 #Fonction option à remplir
@@ -98,9 +102,15 @@ def principal(sexe):
     bien=False
     terminer=False
 
-    # Variable pour la spécialité et le choix du métier
+    # Variable pour contenir le choix de la spécialité et le choix du métier
     choix=""
     choixmetier=""
+    
+    # Listes vides pour contenir le choix du domicile, du transport et des animaux de compagnie
+    choixdomicile=[]
+    choixtransport=[]
+    choixanimal=[]
+    
 
     # Couleur blanche du texte
     color = (255,255,255)
@@ -159,6 +169,10 @@ def principal(sexe):
     domicile = smallfont.render('Domicile:' , True , color)
     transport = smallfont.render('Transport:' , True , color)
     animal = smallfont.render('Animaux:' , True , color)
+    aucunpart1 = smallfont.render("Vous n'avez aucun" , True , color)
+    aucunpartdomicile = smallfont.render('domicile' , True , color)
+    aucunparttransport = smallfont.render('transport' , True , color)
+    aucunpartanimal = smallfont.render('animal' , True , color)
 
     # Texte de la page bien-être
     bienetre = smallfont.render('Bien-être' , True , color)
@@ -465,14 +479,30 @@ def principal(sexe):
                         pygame.draw.rect(fenetreprop,color_red,[80,190,326,550])
                         pygame.draw.rect(fenetreprop,color_red,[427,190,326,550])
                         pygame.draw.rect(fenetreprop,color_red,[774,190,326,550])
+                        
                         # Affichage des noms des catégories
                         fenetreprop.blit(domicile , (160,200))
                         fenetreprop.blit(transport , (500,200))
                         fenetreprop.blit(animal , (860,200))
+                        
+                        # Contenu des catégories
+                        if choixdomicile==[]:
+                            fenetreprop.blit(aucunpart1 , (95,400))
+                            fenetreprop.blit(aucunpartdomicile , (170,450))
+                        if choixtransport==[]:
+                            fenetreprop.blit(aucunpart1 , (445,400))
+                            fenetreprop.blit(aucunparttransport , (510,450))
+                        if choixanimal==[]:
+                            fenetreprop.blit(aucunpart1 , (790,400))
+                            fenetreprop.blit(aucunpartanimal , (880,450))
 
                         # Boucle pour les évènements et pour fermer la page
                         for event in pygame.event.get():
                             if event.type == pygame.MOUSEBUTTONDOWN:
+                                if event.type == QUIT:     #Si un de ces événements est de type QUIT
+                                    fin = True
+                                    prop = False     #On arrête la boucle
+                                    pygame.display.quit()
                                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                                     pygame.display.update()
                                     prop=False
@@ -610,15 +640,16 @@ def principal(sexe):
 
 
 # Code pour le menu du départ en utilisant la bibliothèque pygame_menu
-def __intit__():
+def depart():
     menu = pygame_menu.Menu(800, 1200, 'ONLIFE',theme=mytheme)
     logo= menu.add_image('icon.png')
-    menu.add_button('Jouer', start_the_game)
+    menu.add_button('Jouer', sexe)
     menu.add_button('Option', option_the_game)
     menu.add_button('Quitter', pygame_menu.events.EXIT)
     menu.mainloop(fenetre)
-    return __intit__()
-__intit__()
+    return depart()
+    
+depart()
 
 
 # Code pour pouvoir fermer la page et pour la rafraichir
