@@ -8,7 +8,7 @@ Application du type "jeu de role" ou l'utilisateur se met dans la peau d'un pers
 
 Clara------ Aide pour rechercher comment coder les éléments et transmets les informations dans le readme 
 
-Aurélie---- Code principal et des sous-parties et relectures du readme
+Aurélie---- Page principal et les sous-parties, relecture du dm
 
 Haroun----- Menu principal avec les différents boutons (Jouer, options, et quitter), mini jeu (trouver le bon nombre), et travail sur la conception visuel global du jeu.
 
