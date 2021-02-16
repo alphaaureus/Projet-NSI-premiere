@@ -539,24 +539,25 @@ def principal(sexe):
                 if 525 <= mouse[0] <= 525+200 and 510 <= mouse[1] <= 510+100:
                     # Le joueur peut avancer d'un an s'il à moins de 100 ans
                     if variableage < 100:
+                        # Sinon si tout est bon, la variable variableage s'incrémente de 1 et le texte de l'age est rafraichît
+                        if variableage != 19 and variableage != 24:
+                            variableage = variableage+1
+                            age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
                         # Il ne peut pas avancer d'un an s'il n'a pas choisi de spécialité à 19 ans
-                        if variableage == 19 and choix == "":
+                        elif variableage == 19 and choix == "":
                             print("erreur")
                         # Si une spécialité est choisie il peut avancer
-                        if variableage == 19 and choix != "":
+                        elif variableage == 19 and choix != "":
                             variableage = variableage+1
                             age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
                         # Il ne peut pas avancer d'un an s'il n'a pas choisi de métier à 24 ans
-                        if variableage == 24 and choixmetier == "":
+                        elif variableage == 24 and choixmetier == "":
                             print("erreur")
                         # Si un métier est choisi il peut avancer
-                        if variableage == 24 and choixmetier != "":
+                        elif variableage == 24 and choixmetier != "":
                             variableage = variableage+1
                             age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
-                        # Sinon si tout est bon, la variable variableage s'incrémente de 1 et le texte de l'age est rafraichît
-                        elif variableage < 19 or 19 < variableage < 24 or 24 < variableage:
-                            variableage = variableage+1
-                            age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
+                        
 
                     # Si la personne est arrivée à 100 ans, le jeu se termine
                     else:
@@ -581,7 +582,7 @@ def principal(sexe):
                 # Bouton retour au menu du départ
                 if 900 <= mouse[0] <= 900+200 and 600 <= mouse[1] <= 600+50:
                     sexe=0
-                    __intit__()
+                    depart()
 
         # Mise en place des rectangles des boutons qui changent de couleurs si la souris est au-dessus
         # Bouton éducation
