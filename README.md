@@ -4,7 +4,7 @@
 Application du type "jeu de role" ou l'utilisateur se met dans la peau d'un personnage. (similairement a l'application "bitlife")
 <br>Trello pour s'organiser: https://trello.com/b/nQkLOTQe
 
-####### Travail individuel par élèves
+### Travail individuel par élèves
 Haroun: Menu de départ avec les boutons,le rendu visuel ainsi que le mini-jeu en cours "trouvez le bon nombre"
 Rayene: Amélioration du menu et lier le menu au jeu, seconde page du menu et le mini-jeu en cours "tirer sur les astéroides"
 Aurélie: Page principale avec les boutons qui mènent aux autres pages, 
