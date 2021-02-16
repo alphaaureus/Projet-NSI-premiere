@@ -648,7 +648,8 @@ def depart():
     menu.add_button('Quitter', pygame_menu.events.EXIT)
     menu.mainloop(fenetre)
     return depart()
-    
+
+# Commencer et faire tourner le jeu
 depart()
 
 
