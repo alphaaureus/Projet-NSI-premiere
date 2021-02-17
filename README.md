@@ -19,8 +19,6 @@ Application du type "jeu de role" ou l'utilisateur se met dans la peau d'un pers
   - Quelles sont celles qu'il faut absolument régler au plus vite ?
   - Quelles sont celles qu'on aura pas le temps de surmonter et qu'est-ce que cela implique comme évolution sur le projet final ?
   - Rédiger 1 ou 2 paragraphes sur les principaux aspects techniques du projet (structure de données, modules de bibliothèque utilisés, interfaçage entre les différentes fonctions/fichiers, ...)
-  
-**A faire**
  
 
 
@@ -104,11 +102,21 @@ La seule chose qui pour l'instant sera impossible de faire c'est des barres de v
 
 
 
-
 ### Rédiger 1 ou 2 paragraphes sur les principaux aspects techniques du projet (structure de données, modules de bibliothèque utilisés, interfaçage entre les différentes fonctions/fichiers, ...)
 
 La plupart des spécifications pour le décor de la fenêtre se trouvent au début du code ainsi que des variables. L'extraction des images se fait au début et on a ensuite crée des listes (et bientôt des dictionnaires) nous même pour nous permettre de structurer et stocker les données comme le nom des établissements et des spécialités. 
 
 Nous avons utilisé la bibliotèque pygame et pygame.locals car c'était plus simple pour nous en temps que débutants étant donné que c'est du python et c'est simple à comprendre et manipuler. Une autre bibliotèque que nous avons choisi est "pygame_menu" car nous voulions faire un menu et cette bibliotèque était pratique pour en créer. Puis nous avons importé le module "random" pour pouvoir déterminer aléatoirement les noms des écoles et probablement autres choses par la suite. Nous avons un système d'import entre plusieurs fichiers python pour le mini-jeu car c'est une solution simple que nous avons determiné pour relier nos deux travaux et pour avoir plus d'organisation dans le code.
 
-Nous avons des fonctions différentes reliées entre elles. Une d'elle définit le début du jeu (la fonction "depart"), donc la page d'accueil pour choisir entre jouer qui retourne la fonction "sexe", les options et donc la fonction "option_the_game" et quitter qui ferme la page. Elle se base sur pygame_menu est elle est reliée soit à la fonction "option_the_game" qui est vide pour le moment, soit celle de la page, aussi à base de pygame_menu, pour choisir son sexe (fonction "sexe") qui nous emmène ensuite à la fonction homme ou femme selon le choix. Les fonctions homme ou femme retourne ensuite l'éxécution de la fonction principale avec comme argument 1 ou 2. Cette fonction "principal"  prend en argument le sexe qui est codé par le numéro 1 ou 2 selon le sexe choisis. La fonction principale comporte des variables utilisées ensuite, plus de spécifications pour le décor de la fenêtre et de plusieurs boucles dans une grosse boucle. La grosse boucle fait tourner la page principale et les sous boucles font tourner les différentes sous pages comme l'
+Nous avons des fonctions différentes reliées entre elles. Une d'elle définit le début du jeu (la fonction "depart"), donc la page d'accueil pour choisir entre jouer qui retourne la fonction "sexe", les options et donc la fonction "option_the_game" et quitter qui ferme la page. Elle se base sur pygame_menu est elle est reliée soit à la fonction "option_the_game" qui est vide pour le moment, soit celle de la page, aussi à base de pygame_menu, pour choisir son sexe (fonction "sexe") qui nous emmène ensuite à la fonction homme ou femme selon le choix. Les fonctions homme ou femme retourne ensuite l'éxécution de la fonction principale avec comme argument 1 ou 2. Cette fonction "principal"  prend en argument le sexe qui est codé par le numéro 1 ou 2 selon le sexe choisis. La fonction principale comporte des variables utilisées ensuite, plus de spécifications pour le décor de la fenêtre et de plusieurs boucles dans une grosse boucle. La grosse boucle fait tourner la page principale et les sous boucles font tourner les différentes sous pages comme l'éducation ou la propriété. Il y a aussi des boucles pour la détection d'événements surtout à base de clicks de la souris car notre jeu fonctionne surtout à partir des actions et de la position de la souris.
+
+
+##  Licenses
+This work is licensed under a
+[Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
+
+[![CC BY-SA 4.0][cc-by-sa-image]][cc-by-sa]
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-image]: https://licensebuttons.net/l/by-sa/4.0/88x31.png
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
