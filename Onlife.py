@@ -158,8 +158,8 @@ def principal(sexe):
     plus = smallfont.render('+' , True , color)
     annee = smallfont.render('une année' , True , color)
     retour = smallfont.render('retour' , True , color)
-    argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
     termine = bigfont.render("Vous avez atteint 100 ans, le jeu est terminé!" , True , color)
+    argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
 
     # Texte de la page éducation
     education = smallfont.render('Education' , True , color)
@@ -733,7 +733,15 @@ def principal(sexe):
                         # Ajout du salaire annuel après avoir un métier
                         if variableage > 24:
                             variableargent = variableargent + (salaire*12)
-                            argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
+                            # Arrondi le montant pour ne pas depasser du rectangle sur l'interface
+                            if 9999 < variableargent < 1000000:
+                                arrondi = round(variableargent/1000, 1)
+                                argent = bigfont.render(str(arrondi)+" K "+'€', True , color)
+                            elif 999999 < variableargent:
+                                arrondi = round(variableargent/1000000, 2)
+                                argent = bigfont.render(str(arrondi)+" M "+'€', True , color)
+                            else:
+                                argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
                             fenetre.blit(argent , (865,125))
                         # Si tout est bon, la variable variableage s'incrémente de 1 et le texte de l'age est rafraichît
                         if variableage != 19 and variableage != 24:
@@ -760,7 +768,15 @@ def principal(sexe):
                             variableage = variableage+1
                             age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
                             variableargent = variableargent + (salaire*12)
-                            argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
+                            # Arrondi le montant pour ne pas depasser du rectangle sur l'interface
+                            if 9999 < variableargent < 1000000:
+                                arrondi = round(variableargent/1000, 1)
+                                argent = bigfont.render(str(arrondi)+" K "+'€', True , color)
+                            elif 999999 < variableargent:
+                                arrondi = round(variableargent/1000000, 2)
+                                argent = bigfont.render(str(arrondi)+" M "+'€', True , color)
+                            else:
+                                argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
                             fenetre.blit(argent , (865,125))
 
 
