@@ -73,9 +73,9 @@ listecollege=["Collège Chaptal","Collège Plaisance","Collège Jean Giono","Col
 listelycee=["Lycée Jean Rostand","Lycée Henri Vincenot","Lycée Camille Claudel","Lycée Pasteur","Lycée Gustave Eiffel","Lycée Voltaire","Lycée Parc des Loges","Lycée Martin Luther King","Lycée Honoré Romane","Lycée Jean Monnet"]
 listeuniversite=["Commerce","Ingénieur","Lettres","Arts","Politique","Sc.Sociales","Droit","Architecture","Médecine"]
 dicometiers=["Commerce1","Commerce2","Commerce3","Commerce4","Commerce5","Ingénieur1","Ingénieur2","Ingénieur3","Ingénieur4","Ingénieur5","Lettres1","Lettres2","Lettres3","Lettres4","Lettres5","Arts1","Arts2","Arts3","Arts4","Arts5","Politique1","Politique2","Politique3","Politique4","Politique5","Sc.Sociales1","Sc.Sociales2","Sc.Sociales3","Sc.Sociales4","Sc.Sociales5","Droit1","Droit2","Droit3","Droit4","Droit5","Architecture1","Architecture2","Architecture3","Architecture4","Architecture5","Médecine1","Médecine2","Médecine3","Médecine4","Médecine5"]
-listedomicile=["Studio1","Studio2","Studio3","Studio4","Studio5","Appartement1","Appartement2","Appartement3","Appartement4","Appartement5","Maison1","Maison2","Maison1","Maison2","Maison3","Maison4","Maison5","Villa1","Villa2""Villa3""Villa4""Villa5"]
-listetransport=[]
-listeanimal=[]
+listedomicile=[["Studio1","Prix"],["Studio2","Prix"],["Studio3","Prix"],["Studio4","Prix"],["Studio5","Prix"],["Appartement1","Prix"],["Appartement2","Prix"],["Appartement3","Prix"],["Appartement4","Prix"],["Appartement5","Prix"],["Maison1","Prix"],["Maison2","Prix"],["Maison3","Prix"],["Maison4","Prix"],["Maison5","Prix"],["Villa1","Prix"],["Villa2","Prix"],["Villa3","Prix"],["Villa4","Prix"],["Villa5","Prix"]]
+listetransport=[["Vélo 1","Prix"],["Vélo 2","Prix"],["Moto 1","Prix"],["Moto 2","Prix"],["Auto Berline 1","Prix"],["Auto Berline 2","Prix"],["Auto Break 1","Prix"],["Auto Break 2","Prix"],["Monospace 1","Prix"],["Monospace 2","Prix"],["Citadines 1","Prix"],["Citadines 2","Prix"],["4x4 1","Prix"],["4x4 2","Prix"],["Limousine 1","Prix"],["Limousine 2","Prix"],["Bateau 1","Prix"],["Bateau 2","Prix"],["Jet Privé 1","Prix"],["Jet Privé 2","Prix"]]
+listeanimal=[["Chien 1","Prix"],["Chien 2","Prix"],["Chat 1","Prix"],["Chat 2","Prix"],["Poisson 1","Prix"],["Poisson 2","Prix"],["Furet 1","Prix"],["Furet 2","Prix"],["Cheval 1","Prix"],["Cheval 2","Prix"],["Lapin 1","Prix"],["Lapin 2","Prix"],["Hamster 1","Prix"],["Hamster 2","Prix"],["Oiseau 1","Prix"],["Oiseau 2","Prix"],["Poule 1","Prix"],["Poule 2","Prix"],["Cochon 1","Prix"],["Cochon 2","Prix"]]
 
 
 ## Fonction menu
@@ -195,6 +195,7 @@ def principal(sexe):
     transport1 = smallfont.render('transport' , True , color)
     animal1 = smallfont.render('animal' , True , color)
     acheter = smallfont.render('Acheter un' , True , color)
+    magasin = bigfont.render('Magasin' , True , color)
 
     # Texte de la page bien-être
     bienetre = smallfont.render('Bien-être' , True , color)
@@ -563,6 +564,25 @@ def principal(sexe):
                                         fenetredom = pygame.display.set_mode((width,height))
                                         fenetredom.fill(background_colour)
                                         mouse = pygame.mouse.get_pos()
+                                        #Titre
+                                        pygame.draw.rect(fenetredom,color_dark,[230,25,900,100])
+                                        fenetredom.blit(magasin , (580,40))
+                                        # Affichage des options de domiciles
+                                        x=0
+                                        largeur=75
+                                        for i in range (2):
+                                             hauteur=200
+                                             for i in range (10):
+                                                  ledomicile=listedomicile[x][0]
+                                                  ledomicileprix=listedomicile[x][1]
+                                                  ledomiciletexte1 = smallfont.render(listedomicile[x][0] , True , color)
+                                                  ledomiciletexte2 = smallfont.render(listedomicile[x][1] , True , color)
+                                                  pygame.draw.rect(fenetredom,color_bred,[largeur-10,hauteur+5,450,43])
+                                                  fenetredom.blit(ledomiciletexte1 , (largeur,hauteur))
+                                                  fenetredom.blit(ledomiciletexte2 , (largeur+350,hauteur))
+                                                  hauteur=hauteur+50
+                                                  x=x+1
+                                             largeur=largeur+600
 
                                         # Bouton retour à la page propriété
                                         if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
@@ -591,6 +611,25 @@ def principal(sexe):
                                         fenetretra = pygame.display.set_mode((width,height))
                                         fenetretra.fill(background_colour)
                                         mouse = pygame.mouse.get_pos()
+                                        #Titre
+                                        pygame.draw.rect(fenetretra,color_dark,[230,25,900,100])
+                                        fenetretra.blit(magasin , (580,40))
+                                        # Affichage des options de domiciles
+                                        x=0
+                                        largeur=75
+                                        for i in range (2):
+                                             hauteur=200
+                                             for i in range (10):
+                                                  letransport=listetransport[x][0]
+                                                  letransportprix=listetransport[x][1]
+                                                  letransporttexte1 = smallfont.render(listetransport[x][0] , True , color)
+                                                  letransporttexte2 = smallfont.render(listetransport[x][1] , True , color)
+                                                  pygame.draw.rect(fenetretra,color_bred,[largeur-10,hauteur+5,450,43])
+                                                  fenetretra.blit(letransporttexte1 , (largeur,hauteur))
+                                                  fenetretra.blit(letransporttexte2 , (largeur+350,hauteur))
+                                                  hauteur=hauteur+50
+                                                  x=x+1
+                                             largeur=largeur+600
 
                                         # Bouton retour à la page propriété
                                         if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
@@ -618,6 +657,25 @@ def principal(sexe):
                                         fenetreani = pygame.display.set_mode((width,height))
                                         fenetreani.fill(background_colour)
                                         mouse = pygame.mouse.get_pos()
+                                        #Titre
+                                        pygame.draw.rect(fenetreani,color_dark,[230,25,900,100])
+                                        fenetreani.blit(magasin , (580,40))
+                                        # Affichage des options de domiciles
+                                        x=0
+                                        largeur=75
+                                        for i in range (2):
+                                             hauteur=200
+                                             for i in range (10):
+                                                  lanimal=listeanimal[x][0]
+                                                  lanimalprix=listeanimal[x][1]
+                                                  lanimaltexte1 = smallfont.render(listeanimal[x][0] , True , color)
+                                                  lanimaltexte2 = smallfont.render(listeanimal[x][1] , True , color)
+                                                  pygame.draw.rect(fenetreani,color_bred,[largeur-10,hauteur+5,450,43])
+                                                  fenetreani.blit(lanimaltexte1 , (largeur,hauteur))
+                                                  fenetreani.blit(lanimaltexte2 , (largeur+350,hauteur))
+                                                  hauteur=hauteur+50
+                                                  x=x+1
+                                             largeur=largeur+600
 
                                         # Bouton retour à la page propriété
                                         if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
