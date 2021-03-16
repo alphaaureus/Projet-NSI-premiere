@@ -686,6 +686,10 @@ def principal(sexe):
                             # appliquer l'image du projectiles
                             game.vaisseau.x_projectiles.draw(fenetrebien)
 
+                            #appliquer l'image du boss
+                            fenetrebien.blit(game.boss.image, game.boss.rect)
+
+
                             #ajouter un son pour le projectile
                             son = pygame.mixer.Sound('laser.mp3')
                             # verifier si le joueur veut aller a gauche ou a droite
