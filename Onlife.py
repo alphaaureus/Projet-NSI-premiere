@@ -75,7 +75,7 @@ listeuniversite=["Commerce","Ingénieur","Lettres","Arts","Politique","Sc.Social
 
 dicometiers=[["Commerce1","Salaire"],["Commerce2","Salaire"],["Commerce3","Salaire"],["Commerce4","Salaire"],["Commerce5","Salaire"],["Ingénieur1","Salaire"],["Ingénieur2","Salaire"],["Ingénieur3","Salaire"],["Ingénieur4","Salaire"],["Ingénieur5","Salaire"],["Lettres1","Salaire"],["Lettres2","Salaire"],["Lettres3","Salaire"],["Lettres4","Salaire"],["Lettres5","Salaire"],["Arts1","Salaire"],["Arts2","Salaire"],["Arts3","Salaire"],["Arts4","Salaire"],["Arts5","Salaire"],["Politique1","Salaire"],["Politique2","Salaire"],["Politique3","Salaire"],["Politique4","Salaire"],["Politique5","Salaire"],["Sc.Sociales1","Salaire"],["Sc.Sociales2","Salaire"],["Sc.Sociales3","Salaire"],["Sc.Sociales4","Salaire"],["Sc.Sociales5","Salaire"],["Droit1","Salaire"],["Droit2","Salaire"],["Droit3","Salaire"],["Droit4","Salaire"],["Droit5","Salaire"],["Architecture1","Salaire"],["Architecture2","Salaire"],["Architecture3","Salaire"],["Architecture4","Salaire"],["Architecture5","Salaire"],["Médecine1","Salaire"],["Médecine2","Salaire"],["Médecine3","Salaire"],["Médecine4","Salaire"],["Médecine5","Salaire"]]
 
-listedomicile=[["Studio1","Prix"],["Studio2","Prix"],["Studio3","Prix"],["Studio4","Prix"],["Studio5","Prix"],["Appartement1","Prix"],["Appartement2","Prix"],["Appartement3","Prix"],["Appartement4","Prix"],["Appartement5","Prix"],["Maison1","Prix"],["Maison2","Prix"],["Maison3","Prix"],["Maison4","Prix"],["Maison5","Prix"],["Villa1","Prix"],["Villa2","Prix"],["Villa3","Prix"],["Villa4","Prix"],["Villa5","Prix"]]
+listedomicile=[["Studio1",98],["Studio2",127],["Studio3",75],["Studio4",82],["Studio5",250],["Appartement1",249],["Appartement2",450],["Appartement3",330],["Appartement4",279],["Appartement5",427],["Maison1",985],["Maison2",824],["Maison3",675],["Maison4",310],["Maison5",639],["Villa1",1690],["Villa2",2780],["Villa3",3150],["Villa4",1330],["Villa5",1490]]
 listetransport=[["Vélo 1","Prix"],["Vélo 2","Prix"],["Moto 1","Prix"],["Moto 2","Prix"],["Auto Berline 1","Prix"],["Auto Berline 2","Prix"],["Auto Break 1","Prix"],["Auto Break 2","Prix"],["Monospace 1","Prix"],["Monospace 2","Prix"],["Citadines 1","Prix"],["Citadines 2","Prix"],["4x4 1","Prix"],["4x4 2","Prix"],["Limousine 1","Prix"],["Limousine 2","Prix"],["Bateau 1","Prix"],["Bateau 2","Prix"],["Jet Privé 1","Prix"],["Jet Privé 2","Prix"]]
 listeanimal=[["Chien 1","Prix"],["Chien 2","Prix"],["Chat 1","Prix"],["Chat 2","Prix"],["Poisson 1","Prix"],["Poisson 2","Prix"],["Furet 1","Prix"],["Furet 2","Prix"],["Cheval 1","Prix"],["Cheval 2","Prix"],["Lapin 1","Prix"],["Lapin 2","Prix"],["Hamster 1","Prix"],["Hamster 2","Prix"],["Oiseau 1","Prix"],["Oiseau 2","Prix"],["Poule 1","Prix"],["Poule 2","Prix"],["Cochon 1","Prix"],["Cochon 2","Prix"]]
 
@@ -117,7 +117,7 @@ def principal_homme():
 def principal(sexe):
     #Variables de l'age et de l'argent
     variableage = 0
-    variableargent = 0
+    variableargent = randint(100, 100000)
 
     #Variable pour les différentes pages et boucles du jeu
     fin = False
@@ -428,8 +428,8 @@ def principal(sexe):
                         # Code pour le fonctionnement du choix des métiers
                         if variableage == 24:
                             # Détection du choix de spécialité fait avant et créations des 5 options
-                            # In range 8 car il y a 9 spés
-                            for i in range (8):
+                            # In range 9 car il y a 9 spés
+                            for i in range (9):
                                 # Code mathématique pour déterminer et calculer les options en fonctions de la spécialité
                                 if choix == listeuniversite[i]:
                                     a=i*5
@@ -578,10 +578,10 @@ def principal(sexe):
                                                   ledomicile=listedomicile[x][0]
                                                   ledomicileprix=listedomicile[x][1]
                                                   ledomiciletexte1 = smallfont.render(listedomicile[x][0] , True , color)
-                                                  ledomiciletexte2 = smallfont.render(listedomicile[x][1] , True , color)
-                                                  pygame.draw.rect(fenetredom,color_bred,[largeur-10,hauteur+5,450,43])
+                                                  ledomiciletexte2 = smallfont.render(str(listedomicile[x][1])+" K" , True , color)
+                                                  pygame.draw.rect(fenetredom,color_bred,[largeur-10,hauteur+5,460,43])
                                                   fenetredom.blit(ledomiciletexte1 , (largeur,hauteur))
-                                                  fenetredom.blit(ledomiciletexte2 , (largeur+350,hauteur))
+                                                  fenetredom.blit(ledomiciletexte2 , (largeur+330,hauteur))
                                                   hauteur=hauteur+50
                                                   x=x+1
                                              largeur=largeur+600
@@ -911,6 +911,14 @@ def principal(sexe):
 
         # Affichage du montant de l'argent
         pygame.draw.rect(fenetre,color_dark,[850,100,250,120])
+        if 9999 < variableargent < 1000000:
+            arrondi = round(variableargent/1000, 1)
+            argent = bigfont.render(str(arrondi)+" K "+'€', True , color)
+        elif 999999 < variableargent:
+            arrondi = round(variableargent/1000000, 2)
+            argent = bigfont.render(str(arrondi)+" M "+'€', True , color)
+        else:
+            argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
         fenetre.blit(argent , (865,125))
 
         # Affichage des textes de la page principale sur les boutons par superposition
