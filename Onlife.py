@@ -209,6 +209,7 @@ def principal(sexe):
         persohomme=random.choice(imageshommes)
 
 
+
 ## Boucle infinie qui fait tourner le jeu
 
     while not fin:
@@ -259,10 +260,6 @@ def principal(sexe):
 
                         # Recherche d'évènements
                         for event in pygame.event.get():
-                            if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                                fin = True
-                                edu = False     #On arrête la boucle
-                                pygame.display.quit()
                             if event.type == pygame.MOUSEBUTTONDOWN:
                                 # Détection de sélection des boutons
                                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
@@ -518,48 +515,54 @@ def principal(sexe):
                         fenetreprop.blit(animal , (860,200))
 
                         # Contenu des catégories
+                        # Domicile
                         if choixdomicile==[]:
                             fenetreprop.blit(aucun , (95,400))
                             fenetreprop.blit(domicile1 , (170,450))
-                        if 100 <= mouse[0] <= 100+286 and 600 <= mouse[1] <= 600+100:
-                            pygame.draw.rect(fenetreprop,color_dred,[100,600,286,100])
                         else:
-                            pygame.draw.rect(fenetreprop,color_bred,[100,600,286,100])
-                        fenetreprop.blit(acheter , (150,600))
-                        fenetreprop.blit(domicile1 , (170,650))
+                            b=265
+                            for i in range (len(choixdomicile)):
+                                optiondom = smallfont.render(choixdomicile[i] , True , color)
+                                fenetreprop.blit(optiondom , (100,b))
+                                b=b+50
 
+                        if 100 <= mouse[0] <= 100+286 and 625 <= mouse[1] <= 625+100:
+                            pygame.draw.rect(fenetreprop,color_dred,[100,625,286,100])
+                        else:
+                            pygame.draw.rect(fenetreprop,color_bred,[100,625,286,100])
+                        fenetreprop.blit(acheter , (150,625))
+                        fenetreprop.blit(domicile1 , (170,675))
+
+                        # Transport
                         if choixtransport==[]:
                             fenetreprop.blit(aucun , (445,400))
                             fenetreprop.blit(transport1 , (510,450))
-                        if 447 <= mouse[0] <= 447+286 and 600 <= mouse[1] <= 600+100:
-                            pygame.draw.rect(fenetreprop,color_dred,[447,600,286,100])
+                        if 447 <= mouse[0] <= 447+286 and 650 <= mouse[1] <= 650+100:
+                            pygame.draw.rect(fenetreprop,color_dred,[447,625,286,100])
                         else:
-                            pygame.draw.rect(fenetreprop,color_bred,[447,600,286,100])
-                        fenetreprop.blit(acheter , (500,600))
-                        fenetreprop.blit(transport1 , (510,650))
+                            pygame.draw.rect(fenetreprop,color_bred,[447,625,286,100])
+                        fenetreprop.blit(acheter , (500,625))
+                        fenetreprop.blit(transport1 , (510,675))
 
+                        # Animal
                         if choixanimal==[]:
                             fenetreprop.blit(aucun , (790,400))
                             fenetreprop.blit(animal1 , (880,450))
-                        if 794 <= mouse[0] <= 794+286 and 600 <= mouse[1] <= 600+100:
-                            pygame.draw.rect(fenetreprop,color_dred,[794,600,286,100])
+                        if 794 <= mouse[0] <= 794+286 and 650 <= mouse[1] <= 650+100:
+                            pygame.draw.rect(fenetreprop,color_dred,[794,625,286,100])
                         else:
-                            pygame.draw.rect(fenetreprop,color_bred,[794,600,286,100])
-                        fenetreprop.blit(acheter , (840,600))
-                        fenetreprop.blit(animal1 , (880,650))
+                            pygame.draw.rect(fenetreprop,color_bred,[794,625,286,100])
+                        fenetreprop.blit(acheter , (840,625))
+                        fenetreprop.blit(animal1 , (880,675))
 
                         # Boucle pour les évènements et pour fermer la page
                         for event in pygame.event.get():
                             if event.type == pygame.MOUSEBUTTONDOWN:
-                                if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                                    fin = True
-                                    prop = False     #On arrête la boucle
-                                    pygame.display.quit()
                                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                                     pygame.display.update()
                                     prop=False
 
-                                if 100 <= mouse[0] <= 100+286 and 600 <= mouse[1] <= 600+100: #domicile
+                                if 100 <= mouse[0] <= 100+286 and 625 <= mouse[1] <= 625+100: #domicile
                                     dom=True
                                     while dom:
                                         pygame.display.update()
@@ -573,18 +576,21 @@ def principal(sexe):
                                         x=0
                                         largeur=75
                                         for i in range (2):
-                                             hauteur=200
-                                             for i in range (10):
-                                                  ledomicile=listedomicile[x][0]
-                                                  ledomicileprix=listedomicile[x][1]
-                                                  ledomiciletexte1 = smallfont.render(listedomicile[x][0] , True , color)
-                                                  ledomiciletexte2 = smallfont.render(str(listedomicile[x][1])+" K" , True , color)
-                                                  pygame.draw.rect(fenetredom,color_bred,[largeur-10,hauteur+5,460,43])
-                                                  fenetredom.blit(ledomiciletexte1 , (largeur,hauteur))
-                                                  fenetredom.blit(ledomiciletexte2 , (largeur+330,hauteur))
-                                                  hauteur=hauteur+50
-                                                  x=x+1
-                                             largeur=largeur+600
+                                            hauteur=200
+                                            for i in range (10):
+                                                ledomicile=listedomicile[x][0]
+                                                ledomicileprix=listedomicile[x][1]
+                                                ledomiciletexte1 = smallfont.render(listedomicile[x][0] , True , color)
+                                                ledomiciletexte2 = smallfont.render(str(listedomicile[x][1])+" K" , True , color)
+                                                if listedomicile[x][0] in choixdomicile:
+                                                    pygame.draw.rect(fenetredom,color_dred,[largeur-10,hauteur+5,460,43])
+                                                else:
+                                                    pygame.draw.rect(fenetredom,color_bred,[largeur-10,hauteur+5,460,43])
+                                                fenetredom.blit(ledomiciletexte1 , (largeur,hauteur))
+                                                fenetredom.blit(ledomiciletexte2 , (largeur+330,hauteur))
+                                                hauteur=hauteur+50
+                                                x=x+1
+                                            largeur=largeur+600
 
                                         # Bouton retour à la page propriété
                                         if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
@@ -596,17 +602,196 @@ def principal(sexe):
                                         # Boucle pour les évènements
                                         for event in pygame.event.get():
                                             if event.type == pygame.MOUSEBUTTONDOWN:
-                                                if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                                                    fin = True
-                                                    prop = False     #On arrête la boucle
-                                                    pygame.display.quit()
-
+                                                # Bouton retour
                                                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                                                     pygame.display.update()
                                                     dom=False
 
+                                                # Détection choix du domicile
+                                                #1
+                                                if 65 <= mouse[0] <= 460+65 and 205 <= mouse[1] <= 43+205:
+                                                    if variableargent > (listedomicile[0][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[0][1]*1000)
+                                                        choixdomicile.append(listedomicile[0][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #2
+                                                if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
+                                                    if variableargent > (listedomicile[1][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[1][1]*1000)
+                                                        choixdomicile.append(listedomicile[1][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #3
+                                                if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
+                                                    if variableargent > (listedomicile[2][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[2][1]*1000)
+                                                        choixdomicile.append(listedomicile[2][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #4
+                                                if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
+                                                    if variableargent > (listedomicile[3][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[3][1]*1000)
+                                                        choixdomicile.append(listedomicile[3][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #5
+                                                if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
+                                                    if variableargent > (listedomicile[4][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[4][1]*1000)
+                                                        choixdomicile.append(listedomicile[4][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #6
+                                                if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
+                                                    if variableargent > (listedomicile[5][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[5][1]*1000)
+                                                        choixdomicile.append(listedomicile[5][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #7
+                                                if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
+                                                    if variableargent > (listedomicile[6][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[6][1]*1000)
+                                                        choixdomicile.append(listedomicile[6][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #8
+                                                if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
+                                                    if variableargent > (listedomicile[7][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[7][1]*1000)
+                                                        choixdomicile.append(listedomicile[7][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #9
+                                                if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
+                                                    if variableargent > (listedomicile[8][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[8][1]*1000)
+                                                        choixdomicile.append(listedomicile[8][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #10
+                                                if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
+                                                    if variableargent > (listedomicile[9][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[9][1]*1000)
+                                                        choixdomicile.append(listedomicile[9][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #11
+                                                if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
+                                                    if variableargent > (listedomicile[10][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[10][1]*1000)
+                                                        choixdomicile.append(listedomicile[10][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #12
+                                                if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
+                                                    if variableargent > (listedomicile[11][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[11][1]*1000)
+                                                        choixdomicile.append(listedomicile[11][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #13
+                                                if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
+                                                    if variableargent > (listedomicile[12][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[12][1]*1000)
+                                                        choixdomicile.append(listedomicile[12][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #14
+                                                if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
+                                                    if variableargent > (listedomicile[13][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[13][1]*1000)
+                                                        choixdomicile.append(listedomicile[13][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #15
+                                                if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
+                                                    if variableargent > (listedomicile[14][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[14][1]*1000)
+                                                        choixdomicile.append(listedomicile[14][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #16
+                                                if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
+                                                    if variableargent > (listedomicile[15][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[15][1]*1000)
+                                                        choixdomicile.append(listedomicile[15][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #17
+                                                if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
+                                                    if variableargent > (listedomicile[16][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[16][1]*1000)
+                                                        choixdomicile.append(listedomicile[16][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #18
+                                                if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
+                                                    if variableargent > (listedomicile[17][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[17][1]*1000)
+                                                        choixdomicile.append(listedomicile[17][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #19
+                                                if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
+                                                    if variableargent > (listedomicile[18][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[18][1]*1000)
+                                                        choixdomicile.append(listedomicile[18][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                #20
+                                                if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
+                                                    if variableargent > (listedomicile[19][1]*1000):
+                                                        variableargent = variableargent - (listedomicile[19][1]*1000)
+                                                        choixdomicile.append(listedomicile[19][0])
+                                                    else:
+                                                        root = tkinter.Tk()
+                                                        root.withdraw()
+                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
 
-                                if 447 <= mouse[0] <= 447+286 and 600 <= mouse[1] <= 600+100: #transport
+
+
+                                if 447 <= mouse[0] <= 447+286 and 625 <= mouse[1] <= 625+100: #transport
                                     tra=True
                                     while tra:
                                         pygame.display.update()
@@ -643,16 +828,12 @@ def principal(sexe):
                                         # Boucle pour les évènements
                                         for event in pygame.event.get():
                                             if event.type == pygame.MOUSEBUTTONDOWN:
-                                                if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                                                    fin = True
-                                                    prop = False     #On arrête la boucle
-                                                    pygame.display.quit()
 
                                                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                                                     pygame.display.update()
                                                     tra=False
 
-                                if 794 <= mouse[0] <= 794+286 and 600 <= mouse[1] <= 600+100: #animal
+                                if 794 <= mouse[0] <= 794+286 and 625 <= mouse[1] <= 625+100: #animal
                                     ani=True
                                     while ani:
                                         pygame.display.update()
@@ -689,16 +870,9 @@ def principal(sexe):
                                         # Boucle pour les évènements
                                         for event in pygame.event.get():
                                             if event.type == pygame.MOUSEBUTTONDOWN:
-                                                if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                                                    fin = True
-                                                    prop = False     #On arrête la boucle
-                                                    pygame.display.quit()
-
                                                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                                                     pygame.display.update()
                                                     ani=False
-
-
 
 
 ## Page bien-être (mini-jeu)
@@ -762,11 +936,6 @@ def principal(sexe):
 
                             # Boucle pour les évènements et pour fermer la page
                             for event in pygame.event.get():
-                                #evenement= fermeture de la fenetre
-                                if event.type == pygame.QUIT:
-                                    running= False
-                                    pygame.quit()
-
                                 if event.type == pygame.MOUSEBUTTONDOWN:
                                     if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                                         pygame.display.update()
@@ -783,6 +952,7 @@ def principal(sexe):
 
                                 elif event.type == pygame.KEYUP:
                                     game.pressed[event.key]= False
+
 
 ## Bouton age
 
@@ -812,7 +982,7 @@ def principal(sexe):
                             # hide main window
                             root = tkinter.Tk()
                             root.withdraw()
-                            tkinter.messagebox.showinfo("Information","Il faut choisir une spécialité!")
+                            tkinter.messagebox.showinfo("Attention!","Il faut choisir une spécialité!")
                         # Si une spécialité est choisie il peut avancer
                         elif variableage == 19 and choix != "":
                             variableage = variableage+1
@@ -822,7 +992,7 @@ def principal(sexe):
                             # hide main window
                             root = tkinter.Tk()
                             root.withdraw()
-                            tkinter.messagebox.showinfo("Information","Il faut choisir un métier!")
+                            tkinter.messagebox.showinfo("Attention!","Il faut choisir un métier!")
                         # Si un métier est choisi il peut avancer et recevra son premier salaire
                         elif variableage == 24 and choixmetier != "":
                             variableage = variableage+1
@@ -860,12 +1030,14 @@ def principal(sexe):
                                 fin = True
                                 pygame.display.quit()
 
+
 ## Bouton retour
 
                 # Bouton retour au menu du départ
                 if 900 <= mouse[0] <= 900+200 and 600 <= mouse[1] <= 600+50:
                     sexe=0
                     depart()
+
 
 ## Mise en place des rectangles des boutons de le page pricipale qui changent de couleurs si la souris est au-dessus
 
@@ -898,6 +1070,7 @@ def principal(sexe):
             pygame.draw.rect(fenetre,color_light,[525,510,200,100])
         else:
             pygame.draw.rect(fenetre,color_dark,[525,510,200,100])
+
 
 ## Affichage des éléments de la page principale
 
