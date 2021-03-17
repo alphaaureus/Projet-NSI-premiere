@@ -72,7 +72,9 @@ listeprimaire=["Ecole primaire Guillaume Apollinaire","Ecole primaire Michel Ser
 listecollege=["Collège Chaptal","Collège Plaisance","Collège Jean Giono","Collège les Fontainettes","Collège Victor Hugo","Collège des Trois Vallées","Collège la Sablière","Collège Antoine de Saint-Exupéry","Collège Claude Nicolas le Doux","Collège Les Franchises"]
 listelycee=["Lycée Jean Rostand","Lycée Henri Vincenot","Lycée Camille Claudel","Lycée Pasteur","Lycée Gustave Eiffel","Lycée Voltaire","Lycée Parc des Loges","Lycée Martin Luther King","Lycée Honoré Romane","Lycée Jean Monnet"]
 listeuniversite=["Commerce","Ingénieur","Lettres","Arts","Politique","Sc.Sociales","Droit","Architecture","Médecine"]
-dicometiers=["Commerce1","Commerce2","Commerce3","Commerce4","Commerce5","Ingénieur1","Ingénieur2","Ingénieur3","Ingénieur4","Ingénieur5","Lettres1","Lettres2","Lettres3","Lettres4","Lettres5","Arts1","Arts2","Arts3","Arts4","Arts5","Politique1","Politique2","Politique3","Politique4","Politique5","Sc.Sociales1","Sc.Sociales2","Sc.Sociales3","Sc.Sociales4","Sc.Sociales5","Droit1","Droit2","Droit3","Droit4","Droit5","Architecture1","Architecture2","Architecture3","Architecture4","Architecture5","Médecine1","Médecine2","Médecine3","Médecine4","Médecine5"]
+
+dicometiers=[["Commerce1","Salaire"],["Commerce2","Salaire"],["Commerce3","Salaire"],["Commerce4","Salaire"],["Commerce5","Salaire"],["Ingénieur1","Salaire"],["Ingénieur2","Salaire"],["Ingénieur3","Salaire"],["Ingénieur4","Salaire"],["Ingénieur5","Salaire"],["Lettres1","Salaire"],["Lettres2","Salaire"],["Lettres3","Salaire"],["Lettres4","Salaire"],["Lettres5","Salaire"],["Arts1","Salaire"],["Arts2","Salaire"],["Arts3","Salaire"],["Arts4","Salaire"],["Arts5","Salaire"],["Politique1","Salaire"],["Politique2","Salaire"],["Politique3","Salaire"],["Politique4","Salaire"],["Politique5","Salaire"],["Sc.Sociales1","Salaire"],["Sc.Sociales2","Salaire"],["Sc.Sociales3","Salaire"],["Sc.Sociales4","Salaire"],["Sc.Sociales5","Salaire"],["Droit1","Salaire"],["Droit2","Salaire"],["Droit3","Salaire"],["Droit4","Salaire"],["Droit5","Salaire"],["Architecture1","Salaire"],["Architecture2","Salaire"],["Architecture3","Salaire"],["Architecture4","Salaire"],["Architecture5","Salaire"],["Médecine1","Salaire"],["Médecine2","Salaire"],["Médecine3","Salaire"],["Médecine4","Salaire"],["Médecine5","Salaire"]]
+
 listedomicile=[["Studio1","Prix"],["Studio2","Prix"],["Studio3","Prix"],["Studio4","Prix"],["Studio5","Prix"],["Appartement1","Prix"],["Appartement2","Prix"],["Appartement3","Prix"],["Appartement4","Prix"],["Appartement5","Prix"],["Maison1","Prix"],["Maison2","Prix"],["Maison3","Prix"],["Maison4","Prix"],["Maison5","Prix"],["Villa1","Prix"],["Villa2","Prix"],["Villa3","Prix"],["Villa4","Prix"],["Villa5","Prix"]]
 listetransport=[["Vélo 1","Prix"],["Vélo 2","Prix"],["Moto 1","Prix"],["Moto 2","Prix"],["Auto Berline 1","Prix"],["Auto Berline 2","Prix"],["Auto Break 1","Prix"],["Auto Break 2","Prix"],["Monospace 1","Prix"],["Monospace 2","Prix"],["Citadines 1","Prix"],["Citadines 2","Prix"],["4x4 1","Prix"],["4x4 2","Prix"],["Limousine 1","Prix"],["Limousine 2","Prix"],["Bateau 1","Prix"],["Bateau 2","Prix"],["Jet Privé 1","Prix"],["Jet Privé 2","Prix"]]
 listeanimal=[["Chien 1","Prix"],["Chien 2","Prix"],["Chat 1","Prix"],["Chat 2","Prix"],["Poisson 1","Prix"],["Poisson 2","Prix"],["Furet 1","Prix"],["Furet 2","Prix"],["Cheval 1","Prix"],["Cheval 2","Prix"],["Lapin 1","Prix"],["Lapin 2","Prix"],["Hamster 1","Prix"],["Hamster 2","Prix"],["Oiseau 1","Prix"],["Oiseau 2","Prix"],["Poule 1","Prix"],["Poule 2","Prix"],["Cochon 1","Prix"],["Cochon 2","Prix"]]
@@ -431,16 +433,16 @@ def principal(sexe):
                                 # Code mathématique pour déterminer et calculer les options en fonctions de la spécialité
                                 if choix == listeuniversite[i]:
                                     a=i*5
-                                    option1 = smallfont.render(dicometiers[a] , True , color)
-                                    option01 = dicometiers[a]
-                                    option2 = smallfont.render(dicometiers[a+1] , True , color)
-                                    option02 = dicometiers[a+1]
-                                    option3 = smallfont.render(dicometiers[a+2] , True , color)
-                                    option03 = dicometiers[a+2]
-                                    option4 = smallfont.render(dicometiers[a+3] , True , color)
-                                    option04 = dicometiers[a+3]
-                                    option5 = smallfont.render(dicometiers[a+4] , True , color)
-                                    option05 = dicometiers[a+4]
+                                    option1 = smallfont.render(dicometiers[a][0] , True , color)
+                                    option01 = dicometiers[a][0]
+                                    option2 = smallfont.render(dicometiers[a+1][0] , True , color)
+                                    option02 = dicometiers[a+1][0]
+                                    option3 = smallfont.render(dicometiers[a+2][0] , True , color)
+                                    option03 = dicometiers[a+2][0]
+                                    option4 = smallfont.render(dicometiers[a+3][0] , True , color)
+                                    option04 = dicometiers[a+3][0]
+                                    option5 = smallfont.render(dicometiers[a+4][0] , True , color)
+                                    option05 = dicometiers[a+4][0]
 
                             # Affichage des textes des choix de métiers
                             fenetreedu.blit(option1 , (800,250))
