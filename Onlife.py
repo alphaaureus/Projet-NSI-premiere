@@ -7,8 +7,6 @@ from pygame.locals import *
 from game import Game
 from player import Vaisseau
 from projectile import Projectile
-import tkinter
-from tkinter import messagebox
 
 
 
@@ -76,8 +74,8 @@ listeuniversite=["Commerce","Ingénieur","Lettres","Arts","Politique","Sc.Social
 dicometiers=[["Commerce1","Salaire"],["Commerce2","Salaire"],["Commerce3","Salaire"],["Commerce4","Salaire"],["Commerce5","Salaire"],["Ingénieur1","Salaire"],["Ingénieur2","Salaire"],["Ingénieur3","Salaire"],["Ingénieur4","Salaire"],["Ingénieur5","Salaire"],["Lettres1","Salaire"],["Lettres2","Salaire"],["Lettres3","Salaire"],["Lettres4","Salaire"],["Lettres5","Salaire"],["Arts1","Salaire"],["Arts2","Salaire"],["Arts3","Salaire"],["Arts4","Salaire"],["Arts5","Salaire"],["Politique1","Salaire"],["Politique2","Salaire"],["Politique3","Salaire"],["Politique4","Salaire"],["Politique5","Salaire"],["Sc.Sociales1","Salaire"],["Sc.Sociales2","Salaire"],["Sc.Sociales3","Salaire"],["Sc.Sociales4","Salaire"],["Sc.Sociales5","Salaire"],["Droit1","Salaire"],["Droit2","Salaire"],["Droit3","Salaire"],["Droit4","Salaire"],["Droit5","Salaire"],["Architecture1","Salaire"],["Architecture2","Salaire"],["Architecture3","Salaire"],["Architecture4","Salaire"],["Architecture5","Salaire"],["Médecine1","Salaire"],["Médecine2","Salaire"],["Médecine3","Salaire"],["Médecine4","Salaire"],["Médecine5","Salaire"]]
 
 listedomicile=[["Studio1",98],["Studio2",127],["Studio3",75],["Studio4",82],["Studio5",250],["Appartement1",249],["Appartement2",450],["Appartement3",330],["Appartement4",279],["Appartement5",427],["Maison1",985],["Maison2",824],["Maison3",675],["Maison4",310],["Maison5",639],["Villa1",1690],["Villa2",2780],["Villa3",3150],["Villa4",1330],["Villa5",1490]]
-listetransport=[["Vélo 1","Prix"],["Vélo 2","Prix"],["Moto 1","Prix"],["Moto 2","Prix"],["Auto Berline 1","Prix"],["Auto Berline 2","Prix"],["Auto Break 1","Prix"],["Auto Break 2","Prix"],["Monospace 1","Prix"],["Monospace 2","Prix"],["Citadines 1","Prix"],["Citadines 2","Prix"],["4x4 1","Prix"],["4x4 2","Prix"],["Limousine 1","Prix"],["Limousine 2","Prix"],["Bateau 1","Prix"],["Bateau 2","Prix"],["Jet Privé 1","Prix"],["Jet Privé 2","Prix"]]
-listeanimal=[["Chien 1","Prix"],["Chien 2","Prix"],["Chat 1","Prix"],["Chat 2","Prix"],["Poisson 1","Prix"],["Poisson 2","Prix"],["Furet 1","Prix"],["Furet 2","Prix"],["Cheval 1","Prix"],["Cheval 2","Prix"],["Lapin 1","Prix"],["Lapin 2","Prix"],["Hamster 1","Prix"],["Hamster 2","Prix"],["Oiseau 1","Prix"],["Oiseau 2","Prix"],["Poule 1","Prix"],["Poule 2","Prix"],["Cochon 1","Prix"],["Cochon 2","Prix"]]
+listetransport=[["Vélo 1",1.75],["Vélo 2",4.6],["Moto 1",5.9],["Moto 2",10.3],["Auto Berline 1",15.5],["Auto Berline 2",22.3],["Auto Break 1",16.6],["Auto Break 2",19.2],["Monospace 1",23.6],["Monospace 2",28.1],["Citadines 1",16.2],["Citadines 2",22.9],["4x4 1",29],["4x4 2",31.8],["Limousine 1",47],["Limousine 2",72],["Bateau 1",159],["Bateau 2",385],["Jet Privé 1",2950],["Jet Privé 2",5000]]
+listeanimal=[["Chien 1",1000],["Chien 2",1500],["Chat 1",1000],["Chat 2",1250],["Poisson 1",150],["Poisson 2",250],["Furet 1",2500],["Furet 2",3250],["Cheval 1",6000],["Cheval 2",9750],["Lapin 1",3500],["Lapin 2",4450],["Hamster 1",1700],["Hamster 2",2250],["Oiseau 1",5250],["Oiseau 2",8750],["Poule 1",200],["Poule 2",500],["Cochon 1",3750],["Cochon 2",6500]]
 
 
 ## Fonction menu
@@ -98,7 +96,90 @@ def sexe():
 
 #Fonction option à remplir
 def option_the_game():
-    return option_the_game
+    # Couleur blanche du texte
+    color = (255,255,255)
+    color2= (0,0,0)
+
+    # Couleurs pour les différents rectangles de fond
+    color_light = (170,170,170)
+    color_dark = (100,100,100)
+
+    # Police du texte avec deux tailles différentes
+    smallfont = pygame.font.SysFont('comicsansms',35)
+    smallfont2 = pygame.font.SysFont('comicsansms',25)
+    bigfont = pygame.font.SysFont('comicsansms',50)
+    bigfont2 = pygame.font.SysFont('comicsansms',40)
+
+    # Textes
+    retour = smallfont.render('retour' , True , color)
+    ligne1 = bigfont.render('Bienvenu à Onlife!' , True , color2)
+    ligne2 = smallfont2.render("Le jeu où vous pouvez vivre la vie dont vous avez tant rêvé!", True , color2)
+    ligne3 = smallfont2.render("Vous commencez à l'an 0 avec une somme aléatoire d'argent.", True , color2)
+    ligne4 = smallfont2.render("Pour grandir d'une année, appuyez sur la touche '+ une année'.", True , color2)
+    ligne5 = smallfont2.render("Au fil de votre vie, vous pouvez choisir vos études et votre métier.", True , color2)
+    ligne6 = smallfont2.render("Vous avez 100 ans pour vous amuser le plus possible!", True , color2)
+    ligne7 = bigfont2.render('Éducation:' , True , color2)
+    ligne8 = smallfont2.render("Vous commencez à 3 ans, vous allez à la maternelle, en primaire, au collège puis au lycée.", True , color2)
+    ligne9 = smallfont2.render("À 19 ans, vous pouvez choisir votre spécialité et à 23 ans, votre métier.", True , color2)
+    ligne10 = bigfont2.render('Propriété:' , True , color2)
+    ligne11 = smallfont2.render("Il y a trois catégories de propriété.", True , color2)
+    ligne12 = smallfont2.render("Vous pouvez vous rendre en magasin pour acheter un maximum de 7 articles par catégorie.", True , color2)
+    ligne13 = bigfont2.render('Bien-être:' , True , color2)
+    ligne14 = smallfont2.render("Ici, vous vous lancez dans un jeu complémentaire qui se déroule dans un milieu intergalactique.", True , color2)
+    ligne15 = smallfont2.render("Cela vous permet de gagner de l'argent pour vous acheter tout ce dont vous rêvez.", True , color2)
+
+    # Variable pour la boucle option
+    optionfin=False
+
+    while not optionfin:
+        pygame.display.update()
+        # Mise en place de l'affichage de la fenêtre principale
+        fenetreoption = pygame.display.set_mode((width,height))
+        fenetreoption.fill(background_colour)
+        pygame.draw.rect(fenetreoption, (255,204,204), pygame.Rect(35, 35, width-70, height-70))
+        # Détection de la position de la souris
+        mouse = pygame.mouse.get_pos()
+
+        # Afficher le texte sur l'écran
+        fenetreoption.blit(ligne1, (400,40))
+        fenetreoption.blit(ligne2, (50,130))
+        fenetreoption.blit(ligne3, (50,170))
+        fenetreoption.blit(ligne4, (50,210))
+        fenetreoption.blit(ligne5, (50,250))
+        fenetreoption.blit(ligne6, (50,290))
+        fenetreoption.blit(ligne7, (50,340))
+        fenetreoption.blit(ligne8, (50,390))
+        fenetreoption.blit(ligne9, (50,430))
+        fenetreoption.blit(ligne10, (50,480))
+        fenetreoption.blit(ligne11, (50,530))
+        fenetreoption.blit(ligne12, (50,560))
+        fenetreoption.blit(ligne13, (50,610))
+        fenetreoption.blit(ligne14, (50,660))
+        fenetreoption.blit(ligne15, (50,690))
+
+
+
+        # Bouton retour à la page principale
+        if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
+            pygame.draw.rect(fenetreoption,color_light,[50,50,125,50])
+        else:
+            pygame.draw.rect(fenetreoption,color_dark,[50,50,125,50])
+        fenetreoption.blit(retour , (60,50))
+
+        # Détection d'événements
+        for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+            if event.type == QUIT:     #Si un de ces événements est de type QUIT
+                optionfin = True      #On arrête la boucle
+                pygame.display.quit() #On ferme le display
+
+            # Vérifie si la souris est cliquée
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # Bouton retour
+                if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
+                    pygame.display.update()
+                    optionfin=True
+                    depart()
+
 
 
 ## Fonction du sexe
@@ -537,6 +618,12 @@ def principal(sexe):
                         if choixtransport==[]:
                             fenetreprop.blit(aucun , (445,400))
                             fenetreprop.blit(transport1 , (510,450))
+                        else:
+                            c=265
+                            for i in range (len(choixtransport)):
+                                optiontra = smallfont.render(choixtransport[i] , True , color)
+                                fenetreprop.blit(optiontra , (447,c))
+                                c=c+50
                         if 447 <= mouse[0] <= 447+286 and 650 <= mouse[1] <= 650+100:
                             pygame.draw.rect(fenetreprop,color_dred,[447,625,286,100])
                         else:
@@ -548,6 +635,12 @@ def principal(sexe):
                         if choixanimal==[]:
                             fenetreprop.blit(aucun , (790,400))
                             fenetreprop.blit(animal1 , (880,450))
+                        else:
+                            d=265
+                            for i in range (len(choixanimal)):
+                                optionani = smallfont.render(choixanimal[i] , True , color)
+                                fenetreprop.blit(optionani , (794,d))
+                                d=d+50
                         if 794 <= mouse[0] <= 794+286 and 650 <= mouse[1] <= 650+100:
                             pygame.draw.rect(fenetreprop,color_dred,[794,625,286,100])
                         else:
@@ -562,7 +655,9 @@ def principal(sexe):
                                     pygame.display.update()
                                     prop=False
 
-                                if 100 <= mouse[0] <= 100+286 and 625 <= mouse[1] <= 625+100: #domicile
+### domicile
+
+                                if 100 <= mouse[0] <= 100+286 and 625 <= mouse[1] <= 625+100:
                                     dom=True
                                     while dom:
                                         pygame.display.update()
@@ -582,6 +677,7 @@ def principal(sexe):
                                                 ledomicileprix=listedomicile[x][1]
                                                 ledomiciletexte1 = smallfont.render(listedomicile[x][0] , True , color)
                                                 ledomiciletexte2 = smallfont.render(str(listedomicile[x][1])+" K" , True , color)
+                                                # Rectangle de couleur différente pour savoir si l'objet à déjà été acheté
                                                 if listedomicile[x][0] in choixdomicile:
                                                     pygame.draw.rect(fenetredom,color_dred,[largeur-10,hauteur+5,460,43])
                                                 else:
@@ -610,188 +706,148 @@ def principal(sexe):
                                                 # Détection choix du domicile
                                                 #1
                                                 if 65 <= mouse[0] <= 460+65 and 205 <= mouse[1] <= 43+205:
-                                                    if variableargent > (listedomicile[0][1]*1000):
+                                                    if variableargent > (listedomicile[0][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[0][1]*1000)
                                                         choixdomicile.append(listedomicile[0][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #2
                                                 if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
-                                                    if variableargent > (listedomicile[1][1]*1000):
+                                                    if variableargent > (listedomicile[1][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[1][1]*1000)
                                                         choixdomicile.append(listedomicile[1][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #3
                                                 if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
-                                                    if variableargent > (listedomicile[2][1]*1000):
+                                                    if variableargent > (listedomicile[2][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[2][1]*1000)
                                                         choixdomicile.append(listedomicile[2][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #4
                                                 if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
-                                                    if variableargent > (listedomicile[3][1]*1000):
+                                                    if variableargent > (listedomicile[3][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[3][1]*1000)
                                                         choixdomicile.append(listedomicile[3][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #5
                                                 if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
-                                                    if variableargent > (listedomicile[4][1]*1000):
+                                                    if variableargent > (listedomicile[4][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[4][1]*1000)
                                                         choixdomicile.append(listedomicile[4][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #6
                                                 if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
-                                                    if variableargent > (listedomicile[5][1]*1000):
+                                                    if variableargent > (listedomicile[5][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[5][1]*1000)
                                                         choixdomicile.append(listedomicile[5][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #7
                                                 if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
-                                                    if variableargent > (listedomicile[6][1]*1000):
+                                                    if variableargent > (listedomicile[6][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[6][1]*1000)
                                                         choixdomicile.append(listedomicile[6][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #8
                                                 if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
-                                                    if variableargent > (listedomicile[7][1]*1000):
+                                                    if variableargent > (listedomicile[7][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[7][1]*1000)
                                                         choixdomicile.append(listedomicile[7][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #9
                                                 if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
-                                                    if variableargent > (listedomicile[8][1]*1000):
+                                                    if variableargent > (listedomicile[8][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[8][1]*1000)
                                                         choixdomicile.append(listedomicile[8][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #10
                                                 if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
-                                                    if variableargent > (listedomicile[9][1]*1000):
+                                                    if variableargent > (listedomicile[9][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[9][1]*1000)
                                                         choixdomicile.append(listedomicile[9][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #11
                                                 if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
-                                                    if variableargent > (listedomicile[10][1]*1000):
+                                                    if variableargent > (listedomicile[10][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[10][1]*1000)
                                                         choixdomicile.append(listedomicile[10][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #12
                                                 if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
-                                                    if variableargent > (listedomicile[11][1]*1000):
+                                                    if variableargent > (listedomicile[11][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[11][1]*1000)
                                                         choixdomicile.append(listedomicile[11][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #13
                                                 if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
-                                                    if variableargent > (listedomicile[12][1]*1000):
+                                                    if variableargent > (listedomicile[12][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[12][1]*1000)
                                                         choixdomicile.append(listedomicile[12][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #14
                                                 if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
-                                                    if variableargent > (listedomicile[13][1]*1000):
+                                                    if variableargent > (listedomicile[13][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[13][1]*1000)
                                                         choixdomicile.append(listedomicile[13][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #15
                                                 if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
-                                                    if variableargent > (listedomicile[14][1]*1000):
+                                                    if variableargent > (listedomicile[14][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[14][1]*1000)
                                                         choixdomicile.append(listedomicile[14][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #16
                                                 if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
-                                                    if variableargent > (listedomicile[15][1]*1000):
+                                                    if variableargent > (listedomicile[15][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[15][1]*1000)
                                                         choixdomicile.append(listedomicile[15][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #17
                                                 if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
-                                                    if variableargent > (listedomicile[16][1]*1000):
+                                                    if variableargent > (listedomicile[16][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[16][1]*1000)
                                                         choixdomicile.append(listedomicile[16][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #18
                                                 if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
-                                                    if variableargent > (listedomicile[17][1]*1000):
+                                                    if variableargent > (listedomicile[17][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[17][1]*1000)
                                                         choixdomicile.append(listedomicile[17][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #19
                                                 if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
-                                                    if variableargent > (listedomicile[18][1]*1000):
+                                                    if variableargent > (listedomicile[18][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[18][1]*1000)
                                                         choixdomicile.append(listedomicile[18][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
                                                 #20
                                                 if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
-                                                    if variableargent > (listedomicile[19][1]*1000):
+                                                    if variableargent > (listedomicile[19][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[19][1]*1000)
                                                         choixdomicile.append(listedomicile[19][0])
                                                     else:
-                                                        root = tkinter.Tk()
-                                                        root.withdraw()
-                                                        tkinter.messagebox.showinfo("Attention!","Vous n'avez pas assez d'argent!")
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
 
+### transport
 
-
-                                if 447 <= mouse[0] <= 447+286 and 625 <= mouse[1] <= 625+100: #transport
+                                if 447 <= mouse[0] <= 447+286 and 625 <= mouse[1] <= 625+100:
                                     tra=True
                                     while tra:
                                         pygame.display.update()
@@ -805,18 +861,22 @@ def principal(sexe):
                                         x=0
                                         largeur=75
                                         for i in range (2):
-                                             hauteur=200
-                                             for i in range (10):
-                                                  letransport=listetransport[x][0]
-                                                  letransportprix=listetransport[x][1]
-                                                  letransporttexte1 = smallfont.render(listetransport[x][0] , True , color)
-                                                  letransporttexte2 = smallfont.render(listetransport[x][1] , True , color)
-                                                  pygame.draw.rect(fenetretra,color_bred,[largeur-10,hauteur+5,450,43])
-                                                  fenetretra.blit(letransporttexte1 , (largeur,hauteur))
-                                                  fenetretra.blit(letransporttexte2 , (largeur+350,hauteur))
-                                                  hauteur=hauteur+50
-                                                  x=x+1
-                                             largeur=largeur+600
+                                            hauteur=200
+                                            for i in range (10):
+                                                letransport=listetransport[x][0]
+                                                letransportprix=listetransport[x][1]
+                                                letransporttexte1 = smallfont.render(listetransport[x][0] , True , color)
+                                                letransporttexte2 = smallfont.render(str(listetransport[x][1])+" K", True , color)
+                                                # Rectangle de couleur différente pour savoir si l'objet à déjà été acheté
+                                                if listetransport[x][0] in choixtransport:
+                                                    pygame.draw.rect(fenetretra,color_dred,[largeur-10,hauteur+5,460,43])
+                                                else:
+                                                    pygame.draw.rect(fenetretra,color_bred,[largeur-10,hauteur+5,460,43])
+                                                fenetretra.blit(letransporttexte1 , (largeur,hauteur))
+                                                fenetretra.blit(letransporttexte2 , (largeur+330,hauteur))
+                                                hauteur=hauteur+50
+                                                x=x+1
+                                            largeur=largeur+600
 
                                         # Bouton retour à la page propriété
                                         if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
@@ -833,7 +893,151 @@ def principal(sexe):
                                                     pygame.display.update()
                                                     tra=False
 
-                                if 794 <= mouse[0] <= 794+286 and 625 <= mouse[1] <= 625+100: #animal
+                                                # Détection choix du transport
+                                                #1
+                                                if 65 <= mouse[0] <= 460+65 and 205 <= mouse[1] <= 43+205:
+                                                    if variableargent > (listetransport[0][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[0][1]*1000)
+                                                        choixtransport.append(listetransport[0][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #2
+                                                if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
+                                                    if variableargent > (listetransport[1][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[1][1]*1000)
+                                                        choixtransport.append(listetransport[1][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #3
+                                                if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
+                                                    if variableargent > (listetransport[2][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[2][1]*1000)
+                                                        choixtransport.append(listetransport[2][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #4
+                                                if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
+                                                    if variableargent > (listetransport[3][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[3][1]*1000)
+                                                        choixtransport.append(listetransport[3][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #5
+                                                if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
+                                                    if variableargent > (listetransport[4][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[4][1]*1000)
+                                                        choixtransport.append(listetransport[4][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #6
+                                                if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
+                                                    if variableargent > (listetransport[5][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[5][1]*1000)
+                                                        choixtransport.append(listetransport[5][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #7
+                                                if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
+                                                    if variableargent > (listetransport[6][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[6][1]*1000)
+                                                        choixtransport.append(listetransport[6][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #8
+                                                if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
+                                                    if variableargent > (listetransport[7][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[7][1]*1000)
+                                                        choixtransport.append(listetransport[7][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #9
+                                                if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
+                                                    if variableargent > (listetransport[8][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[8][1]*1000)
+                                                        choixtransport.append(listetransport[8][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #10
+                                                if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
+                                                    if variableargent > (listetransport[9][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[9][1]*1000)
+                                                        choixtransport.append(listetransport[9][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #11
+                                                if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
+                                                    if variableargent > (listetransport[10][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[10][1]*1000)
+                                                        choixtransport.append(listetransport[10][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #12
+                                                if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
+                                                    if variableargent > (listetransport[11][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[11][1]*1000)
+                                                        choixtransport.append(listetransport[11][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #13
+                                                if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
+                                                    if variableargent > (listetransport[12][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[12][1]*1000)
+                                                        choixtransport.append(listetransport[12][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #14
+                                                if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
+                                                    if variableargent > (listetransport[13][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[13][1]*1000)
+                                                        choixtransport.append(listetransport[13][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #15
+                                                if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
+                                                    if variableargent > (listetransport[14][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[14][1]*1000)
+                                                        choixtransport.append(listetransport[14][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #16
+                                                if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
+                                                    if variableargent > (listetransport[15][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[15][1]*1000)
+                                                        choixtransport.append(listetransport[15][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #17
+                                                if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
+                                                    if variableargent > (listetransport[16][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[16][1]*1000)
+                                                        choixtransport.append(listetransport[16][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #18
+                                                if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
+                                                    if variableargent > (listetransport[17][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[17][1]*1000)
+                                                        choixtransport.append(listetransport[17][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #19
+                                                if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
+                                                    if variableargent > (listetransport[18][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[18][1]*1000)
+                                                        choixtransport.append(listetransport[18][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                #20
+                                                if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
+                                                    if variableargent > (listetransport[19][1]*1000) and len(choixtransport)<7:
+                                                        variableargent = variableargent - (listetransport[19][1]*1000)
+                                                        choixtransport.append(listetransport[19][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+
+### animal
+
+                                if 794 <= mouse[0] <= 794+286 and 625 <= mouse[1] <= 625+100:
                                     ani=True
                                     while ani:
                                         pygame.display.update()
@@ -847,18 +1051,22 @@ def principal(sexe):
                                         x=0
                                         largeur=75
                                         for i in range (2):
-                                             hauteur=200
-                                             for i in range (10):
-                                                  lanimal=listeanimal[x][0]
-                                                  lanimalprix=listeanimal[x][1]
-                                                  lanimaltexte1 = smallfont.render(listeanimal[x][0] , True , color)
-                                                  lanimaltexte2 = smallfont.render(listeanimal[x][1] , True , color)
-                                                  pygame.draw.rect(fenetreani,color_bred,[largeur-10,hauteur+5,450,43])
-                                                  fenetreani.blit(lanimaltexte1 , (largeur,hauteur))
-                                                  fenetreani.blit(lanimaltexte2 , (largeur+350,hauteur))
-                                                  hauteur=hauteur+50
-                                                  x=x+1
-                                             largeur=largeur+600
+                                            hauteur=200
+                                            for i in range (10):
+                                                lanimal=listeanimal[x][0]
+                                                lanimalprix=listeanimal[x][1]
+                                                lanimaltexte1 = smallfont.render(listeanimal[x][0] , True , color)
+                                                lanimaltexte2 = smallfont.render(str(listeanimal[x][1]) , True , color)
+                                                # Rectangle de couleur différente pour savoir si l'objet à déjà été acheté
+                                                if listeanimal[x][0] in choixanimal:
+                                                    pygame.draw.rect(fenetreani,color_dred,[largeur-10,hauteur+5,460,43])
+                                                else:
+                                                    pygame.draw.rect(fenetreani,color_bred,[largeur-10,hauteur+5,460,43])
+                                                fenetreani.blit(lanimaltexte1 , (largeur,hauteur))
+                                                fenetreani.blit(lanimaltexte2 , (largeur+350,hauteur))
+                                                hauteur=hauteur+50
+                                                x=x+1
+                                            largeur=largeur+600
 
                                         # Bouton retour à la page propriété
                                         if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
@@ -873,6 +1081,148 @@ def principal(sexe):
                                                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                                                     pygame.display.update()
                                                     ani=False
+
+                                                # Détection choix de l'animal
+                                                #1
+                                                if 65 <= mouse[0] <= 460+65 and 205 <= mouse[1] <= 43+205:
+                                                    if variableargent > (listeanimal[0][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[0][1])
+                                                        choixanimal.append(listeanimal[0][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #2
+                                                if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
+                                                    if variableargent > (listeanimal[1][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[1][1])
+                                                        choixanimal.append(listeanimal[1][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux'")
+                                                #3
+                                                if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
+                                                    if variableargent > (listeanimal[2][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[2][1])
+                                                        choixanimal.append(listeanimal[2][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #4
+                                                if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
+                                                    if variableargent > (listeanimal[3][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[3][1])
+                                                        choixanimal.append(listeanimal[3][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #5
+                                                if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
+                                                    if variableargent > (listeanimal[4][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[4][1])
+                                                        choixanimal.append(listeanimal[4][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #6
+                                                if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
+                                                    if variableargent > (listeanimal[5][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[5][1])
+                                                        choixanimal.append(listeanimal[5][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #7
+                                                if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
+                                                    if variableargent > (listeanimal[6][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[6][1])
+                                                        choixanimal.append(listeanimal[6][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #8
+                                                if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
+                                                    if variableargent > (listeanimal[7][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[7][1])
+                                                        choixanimal.append(listeanimal[7][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #9
+                                                if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
+                                                    if variableargent > (listeanimal[8][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[8][1])
+                                                        choixanimal.append(listeanimal[8][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #10
+                                                if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
+                                                    if variableargent > (listeanimal[9][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[9][1])
+                                                        choixanimal.append(listeanimal[9][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #11
+                                                if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
+                                                    if variableargent > (listeanimal[10][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[10][1])
+                                                        choixanimal.append(listeanimal[10][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #12
+                                                if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
+                                                    if variableargent > (listeanimal[11][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[11][1])
+                                                        choixanimal.append(listeanimal[11][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #13
+                                                if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
+                                                    if variableargent > (listeanimal[12][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[12][1])
+                                                        choixanimal.append(listeanimal[12][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #14
+                                                if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
+                                                    if variableargent > (listeanimal[13][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[13][1])
+                                                        choixanimal.append(listeanimal[13][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #15
+                                                if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
+                                                    if variableargent > (listeanimal[14][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[14][1])
+                                                        choixanimal.append(listeanimal[14][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #16
+                                                if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
+                                                    if variableargent > (listeanimal[15][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[15][1])
+                                                        choixanimal.append(listeanimal[15][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #17
+                                                if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
+                                                    if variableargent > (listeanimal[16][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[16][1])
+                                                        choixanimal.append(listeanimal[16][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #18
+                                                if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
+                                                    if variableargent > (listeanimal[17][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[17][1])
+                                                        choixanimal.append(listeanimal[17][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #19
+                                                if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
+                                                    if variableargent > (listeanimal[18][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[18][1])
+                                                        choixanimal.append(listeanimal[18][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                #20
+                                                if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
+                                                    if variableargent > (listeanimal[19][1]) and len(choixanimal)<7:
+                                                        variableargent = variableargent - (listeanimal[19][1])
+                                                        choixanimal.append(listeanimal[19][0])
+                                                    else:
+                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
 
 
 ## Page bien-être (mini-jeu)
@@ -979,20 +1329,14 @@ def principal(sexe):
                             age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
                         # Il ne peut pas avancer d'un an s'il n'a pas choisi de spécialité à 19 ans
                         elif variableage == 19 and choix == "":
-                            # hide main window
-                            root = tkinter.Tk()
-                            root.withdraw()
-                            tkinter.messagebox.showinfo("Attention!","Il faut choisir une spécialité!")
+                            print("Pas de spe")
                         # Si une spécialité est choisie il peut avancer
                         elif variableage == 19 and choix != "":
                             variableage = variableage+1
                             age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
                         # Il ne peut pas avancer d'un an s'il n'a pas choisi de métier à 24 ans
                         elif variableage == 24 and choixmetier == "":
-                            # hide main window
-                            root = tkinter.Tk()
-                            root.withdraw()
-                            tkinter.messagebox.showinfo("Attention!","Il faut choisir un métier!")
+                            print("Pas de metier")
                         # Si un métier est choisi il peut avancer et recevra son premier salaire
                         elif variableage == 24 and choixmetier != "":
                             variableage = variableage+1
@@ -1114,7 +1458,7 @@ def depart():
     menu = pygame_menu.Menu(800, 1200, 'ONLIFE',theme=mytheme)
     logo= menu.add_image('icon.png')
     menu.add_button('Jouer', sexe)
-    menu.add_button('Option', option_the_game)
+    menu.add_button('Guide', option_the_game)
     menu.add_button('Quitter', pygame_menu.events.EXIT)
     menu.mainloop(fenetre)
     return depart()
