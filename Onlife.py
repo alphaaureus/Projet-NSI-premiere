@@ -71,6 +71,7 @@ sexe = 0
 # Variable du salaire (aléatoire pour le moment)
 salaire = 0
 
+
 #Listes pour la page enseignement
 listematernelle=["Ecole maternelle Béré","Ecole maternelle Le Coudray","Ecole maternelle Henri Bergson","Ecole maternelle Jules Ferry","Ecole maternelle Claude Monet","Ecole maternelle Prince Bois","Ecole maternelle Le Bourgeau","Ecole maternelle du Massif","Ecole maternelle Molière","Ecole maternelle du Centre"]
 listeprimaire=["Ecole primaire Guillaume Apollinaire","Ecole primaire Michel Servet","Ecole primaire Albert Barraud","Ecoles primaire les Néréides","Ecole primaire Jean Jaurès","Ecole primaire Jacques Prévert","Ecole primaire Charles Perrault","Ecole primaire La Clé des Champs","Ecole primaire Les Nondales","Ecole primaire L'Arbre Enchanté"]
@@ -121,7 +122,7 @@ def option_the_game():
     ligne2 = smallfont2.render("Le jeu où vous pouvez vivre la vie dont vous avez tant rêvé!", True , color2)
     ligne3 = smallfont2.render("Vous commencez à l'an 0 avec une somme aléatoire d'argent.", True , color2)
     ligne4 = smallfont2.render("Pour grandir d'une année, appuyez sur la touche '+ une année'.", True , color2)
-    ligne5 = smallfont2.render("Au fil de votre vie, vous pouvez choisir vos études et votre métier.", True , color2)
+    ligne5 = smallfont2.render("Au fil de votre vie, vous pouvez choisir vos études, votre métier et jouer au mini-jeu.", True , color2)
     ligne6 = smallfont2.render("Vous avez 100 ans pour vous amuser le plus possible!", True , color2)
     ligne7 = bigfont2.render('Éducation:' , True , color2)
     ligne8 = smallfont2.render("Vous commencez à 3 ans, vous allez à la maternelle, en primaire, au collège puis au lycée.", True , color2)
@@ -202,6 +203,11 @@ def principal(sexe):
     variableage = 0
     variableargent = randint(100, 100000)
 
+    # Variables pour les erreurs
+    erreur = 0
+    erreur2 = 0
+    erreurani = 0
+
     #Variable pour les différentes pages et boucles du jeu
     fin = False
     edu=False
@@ -232,6 +238,7 @@ def principal(sexe):
     game_colour2 = (128,128,128)
 
     # Police du texte avec deux tailles différentes
+    minifont = pygame.font.SysFont('comicsansms',30)
     smallfont = pygame.font.SysFont('comicsansms',35)
     mediumfont = pygame.font.SysFont('comicsansms',40)
     bigfont = pygame.font.SysFont('comicsansms',50)
@@ -250,6 +257,8 @@ def principal(sexe):
     retour = smallfont.render('retour' , True , color)
     termine = bigfont.render("Vous avez atteint 100 ans, le jeu est terminé!" , True , color)
     argent = bigfont.render(str(variableargent)+"  "+'€', True , color)
+    pasdespe = smallfont.render('Pas de spécialité!' , True , color_dark)
+    pasdemet = smallfont.render('Pas de métier!' , True , color_dark)
 
     # Texte de la page éducation
     education = smallfont.render('Education' , True , color)
@@ -287,6 +296,10 @@ def principal(sexe):
     animal1 = smallfont.render('animal' , True , color)
     acheter = smallfont.render('Acheter un' , True , color)
     magasin = bigfont.render('Magasin' , True , color)
+    maximumdom = minifont.render("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles!" , True , color_dark)
+    maximumtra = minifont.render("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports!" , True , color_dark)
+    maximumani = minifont.render("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux!" , True , color_dark)
+
 
     # Texte de la page bien-être
     bienetre = smallfont.render('Bien-être' , True , color)
@@ -771,6 +784,8 @@ def principal(sexe):
 
                                 if 100 <= mouse[0] <= 100+286 and 625 <= mouse[1] <= 625+100:
                                     dom=True
+                                    # Variable pour les erreurs
+                                    erreurdom = 0
                                     while dom:
                                         pygame.display.update()
                                         fenetredom = pygame.display.set_mode((width,height))
@@ -782,6 +797,7 @@ def principal(sexe):
                                         # Affichage des options de domiciles
                                         x=0
                                         largeur=75
+
                                         for i in range (2):
                                             hauteur=200
                                             for i in range (10):
@@ -821,146 +837,173 @@ def principal(sexe):
                                                     if variableargent > (listedomicile[0][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[0][1]*1000)
                                                         choixdomicile.append(listedomicile[0][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #2
                                                 if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
                                                     if variableargent > (listedomicile[1][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[1][1]*1000)
                                                         choixdomicile.append(listedomicile[1][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #3
                                                 if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
                                                     if variableargent > (listedomicile[2][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[2][1]*1000)
                                                         choixdomicile.append(listedomicile[2][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #4
                                                 if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
                                                     if variableargent > (listedomicile[3][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[3][1]*1000)
                                                         choixdomicile.append(listedomicile[3][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #5
                                                 if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
                                                     if variableargent > (listedomicile[4][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[4][1]*1000)
                                                         choixdomicile.append(listedomicile[4][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #6
                                                 if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
                                                     if variableargent > (listedomicile[5][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[5][1]*1000)
                                                         choixdomicile.append(listedomicile[5][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #7
                                                 if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
                                                     if variableargent > (listedomicile[6][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[6][1]*1000)
                                                         choixdomicile.append(listedomicile[6][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #8
                                                 if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
                                                     if variableargent > (listedomicile[7][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[7][1]*1000)
                                                         choixdomicile.append(listedomicile[7][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #9
                                                 if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
                                                     if variableargent > (listedomicile[8][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[8][1]*1000)
                                                         choixdomicile.append(listedomicile[8][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #10
                                                 if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
                                                     if variableargent > (listedomicile[9][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[9][1]*1000)
                                                         choixdomicile.append(listedomicile[9][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #11
                                                 if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
                                                     if variableargent > (listedomicile[10][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[10][1]*1000)
                                                         choixdomicile.append(listedomicile[10][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #12
                                                 if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
                                                     if variableargent > (listedomicile[11][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[11][1]*1000)
                                                         choixdomicile.append(listedomicile[11][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #13
                                                 if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
                                                     if variableargent > (listedomicile[12][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[12][1]*1000)
                                                         choixdomicile.append(listedomicile[12][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #14
                                                 if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
                                                     if variableargent > (listedomicile[13][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[13][1]*1000)
                                                         choixdomicile.append(listedomicile[13][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #15
                                                 if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
                                                     if variableargent > (listedomicile[14][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[14][1]*1000)
                                                         choixdomicile.append(listedomicile[14][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #16
                                                 if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
                                                     if variableargent > (listedomicile[15][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[15][1]*1000)
                                                         choixdomicile.append(listedomicile[15][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #17
                                                 if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
                                                     if variableargent > (listedomicile[16][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[16][1]*1000)
                                                         choixdomicile.append(listedomicile[16][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #18
                                                 if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
                                                     if variableargent > (listedomicile[17][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[17][1]*1000)
                                                         choixdomicile.append(listedomicile[17][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #19
                                                 if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
                                                     if variableargent > (listedomicile[18][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[18][1]*1000)
                                                         choixdomicile.append(listedomicile[18][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
                                                 #20
                                                 if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
                                                     if variableargent > (listedomicile[19][1]*1000) and len(choixdomicile)<7:
                                                         variableargent = variableargent - (listedomicile[19][1]*1000)
                                                         choixdomicile.append(listedomicile[19][0])
+                                                        erreurdom=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de domiciles")
+                                                        erreurdom=erreurdom+1
+
+                                        # Blit des erreurs
+                                        if erreurdom > 0:
+                                            fenetredom.blit(maximumdom , (60,720))
+
 
 ### transport
 
                                 if 447 <= mouse[0] <= 447+286 and 625 <= mouse[1] <= 625+100:
                                     tra=True
+                                    # Variable pour les erreurs
+                                    erreurtra = 0
                                     while tra:
                                         pygame.display.update()
                                         fenetretra = pygame.display.set_mode((width,height))
@@ -1011,146 +1054,172 @@ def principal(sexe):
                                                     if variableargent > (listetransport[0][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[0][1]*1000)
                                                         choixtransport.append(listetransport[0][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #2
                                                 if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
                                                     if variableargent > (listetransport[1][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[1][1]*1000)
                                                         choixtransport.append(listetransport[1][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #3
                                                 if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
                                                     if variableargent > (listetransport[2][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[2][1]*1000)
                                                         choixtransport.append(listetransport[2][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #4
                                                 if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
                                                     if variableargent > (listetransport[3][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[3][1]*1000)
                                                         choixtransport.append(listetransport[3][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #5
                                                 if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
                                                     if variableargent > (listetransport[4][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[4][1]*1000)
                                                         choixtransport.append(listetransport[4][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #6
                                                 if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
                                                     if variableargent > (listetransport[5][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[5][1]*1000)
                                                         choixtransport.append(listetransport[5][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #7
                                                 if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
                                                     if variableargent > (listetransport[6][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[6][1]*1000)
                                                         choixtransport.append(listetransport[6][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #8
                                                 if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
                                                     if variableargent > (listetransport[7][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[7][1]*1000)
                                                         choixtransport.append(listetransport[7][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #9
                                                 if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
                                                     if variableargent > (listetransport[8][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[8][1]*1000)
                                                         choixtransport.append(listetransport[8][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #10
                                                 if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
                                                     if variableargent > (listetransport[9][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[9][1]*1000)
                                                         choixtransport.append(listetransport[9][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #11
                                                 if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
                                                     if variableargent > (listetransport[10][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[10][1]*1000)
                                                         choixtransport.append(listetransport[10][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #12
                                                 if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
                                                     if variableargent > (listetransport[11][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[11][1]*1000)
                                                         choixtransport.append(listetransport[11][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #13
                                                 if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
                                                     if variableargent > (listetransport[12][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[12][1]*1000)
                                                         choixtransport.append(listetransport[12][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #14
                                                 if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
                                                     if variableargent > (listetransport[13][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[13][1]*1000)
                                                         choixtransport.append(listetransport[13][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #15
                                                 if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
                                                     if variableargent > (listetransport[14][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[14][1]*1000)
                                                         choixtransport.append(listetransport[14][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #16
                                                 if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
                                                     if variableargent > (listetransport[15][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[15][1]*1000)
                                                         choixtransport.append(listetransport[15][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #17
                                                 if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
                                                     if variableargent > (listetransport[16][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[16][1]*1000)
                                                         choixtransport.append(listetransport[16][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #18
                                                 if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
                                                     if variableargent > (listetransport[17][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[17][1]*1000)
                                                         choixtransport.append(listetransport[17][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #19
                                                 if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
                                                     if variableargent > (listetransport[18][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[18][1]*1000)
                                                         choixtransport.append(listetransport[18][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
                                                 #20
                                                 if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
                                                     if variableargent > (listetransport[19][1]*1000) and len(choixtransport)<7:
                                                         variableargent = variableargent - (listetransport[19][1]*1000)
                                                         choixtransport.append(listetransport[19][0])
+                                                        erreurtra=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum de transports")
+                                                        erreurtra=erreurtra+1
+
+                                        # Blit des erreurs
+                                        if erreurtra > 0:
+                                            fenetretra.blit(maximumtra , (60,720))
 
 ### animal
 
                                 if 794 <= mouse[0] <= 794+286 and 625 <= mouse[1] <= 625+100:
                                     ani=True
+                                    # Variable pour les erreurs
+                                    erreurani = 0
                                     while ani:
                                         pygame.display.update()
                                         fenetreani = pygame.display.set_mode((width,height))
@@ -1200,141 +1269,165 @@ def principal(sexe):
                                                     if variableargent > (listeanimal[0][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[0][1])
                                                         choixanimal.append(listeanimal[0][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #2
                                                 if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
                                                     if variableargent > (listeanimal[1][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[1][1])
                                                         choixanimal.append(listeanimal[1][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux'")
+                                                        erreurani=erreurani+1
                                                 #3
                                                 if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
                                                     if variableargent > (listeanimal[2][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[2][1])
                                                         choixanimal.append(listeanimal[2][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #4
                                                 if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
                                                     if variableargent > (listeanimal[3][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[3][1])
                                                         choixanimal.append(listeanimal[3][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #5
                                                 if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
                                                     if variableargent > (listeanimal[4][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[4][1])
                                                         choixanimal.append(listeanimal[4][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #6
                                                 if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
                                                     if variableargent > (listeanimal[5][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[5][1])
                                                         choixanimal.append(listeanimal[5][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #7
                                                 if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
                                                     if variableargent > (listeanimal[6][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[6][1])
                                                         choixanimal.append(listeanimal[6][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #8
                                                 if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
                                                     if variableargent > (listeanimal[7][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[7][1])
                                                         choixanimal.append(listeanimal[7][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #9
                                                 if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
                                                     if variableargent > (listeanimal[8][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[8][1])
                                                         choixanimal.append(listeanimal[8][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #10
                                                 if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
                                                     if variableargent > (listeanimal[9][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[9][1])
                                                         choixanimal.append(listeanimal[9][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #11
                                                 if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
                                                     if variableargent > (listeanimal[10][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[10][1])
                                                         choixanimal.append(listeanimal[10][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #12
                                                 if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
                                                     if variableargent > (listeanimal[11][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[11][1])
                                                         choixanimal.append(listeanimal[11][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #13
                                                 if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
                                                     if variableargent > (listeanimal[12][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[12][1])
                                                         choixanimal.append(listeanimal[12][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #14
                                                 if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
                                                     if variableargent > (listeanimal[13][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[13][1])
                                                         choixanimal.append(listeanimal[13][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #15
                                                 if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
                                                     if variableargent > (listeanimal[14][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[14][1])
                                                         choixanimal.append(listeanimal[14][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #16
                                                 if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
                                                     if variableargent > (listeanimal[15][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[15][1])
                                                         choixanimal.append(listeanimal[15][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #17
                                                 if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
                                                     if variableargent > (listeanimal[16][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[16][1])
                                                         choixanimal.append(listeanimal[16][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #18
                                                 if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
                                                     if variableargent > (listeanimal[17][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[17][1])
                                                         choixanimal.append(listeanimal[17][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #19
                                                 if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
                                                     if variableargent > (listeanimal[18][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[18][1])
                                                         choixanimal.append(listeanimal[18][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
                                                 #20
                                                 if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
                                                     if variableargent > (listeanimal[19][1]) and len(choixanimal)<7:
                                                         variableargent = variableargent - (listeanimal[19][1])
                                                         choixanimal.append(listeanimal[19][0])
+                                                        erreurani=0
                                                     else:
-                                                        print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
+                                                        erreurani=erreurani+1
+
+                                        # Blit des erreurs
+                                        if erreurani > 0:
+                                            fenetreani.blit(maximumani , (60,720))
 
 
 ## Page bien-être
@@ -1391,14 +1484,14 @@ def principal(sexe):
                             age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
                         # Il ne peut pas avancer d'un an s'il n'a pas choisi de spécialité à 19 ans
                         elif variableage == 19 and choix == "":
-                            print("Pas de spe")
+                            erreur = erreur+1
                         # Si une spécialité est choisie il peut avancer
                         elif variableage == 19 and choix != "":
                             variableage = variableage+1
                             age = smallfont.render('Age:'+"  "+str(variableage) , True , color)
                         # Il ne peut pas avancer d'un an s'il n'a pas choisi de métier à 24 ans
                         elif variableage == 24 and choixmetier == "":
-                            print("Pas de metier")
+                            erreur2 = erreur2+1
                         # Si un métier est choisi il peut avancer et recevra son premier salaire
                         elif variableage == 24 and choixmetier != "":
                             variableage = variableage+1
@@ -1507,6 +1600,12 @@ def principal(sexe):
         fenetre.blit(propriete , (925,400))
         fenetre.blit(bienetre , (922,500))
         fenetre.blit(retourmenu , (945,600))
+
+        # Erreurs
+        if erreur > 0 and variableage == 19 and choix == "":
+            fenetre.blit(pasdespe , (485,640))
+        if erreur2 > 0 and variableage == 24 and choixmetier == "":
+            fenetre.blit(pasdemet , (510,640))
 
         # Update le display du jeu
         pygame.display.update()
