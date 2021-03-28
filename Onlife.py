@@ -47,6 +47,8 @@ homme5=pygame.image.load('Homme5.png').convert_alpha()
 imagesfemmes=[femme1,femme2,femme3,femme4]
 imageshommes=[homme1,homme2,homme3,homme4,homme5]
 
+school2=pygame.image.load('school.png').convert_alpha()
+school=pygame.transform.scale(school2,(975,500))
 interview=pygame.image.load('interview.png').convert_alpha()
 bannerright2=pygame.image.load('bannerright2.png').convert_alpha()
 bannerright=pygame.transform.scale(bannerright2,(400,600))
@@ -610,7 +612,8 @@ def principal(sexe):
 
                         # Affichage de la spécialité choisie pendant les 5 ans d'université
                         if variableage > 19 and variableage <= 23:
-                            fenetreedu.blit(specialite , (100,200))
+                            fenetreedu.blit(specialite , (100,175))
+                            fenetreedu.blit(school , (100,235))
 
                         # Code pour le fonctionnement du choix des métiers
                         if variableage == 24:
