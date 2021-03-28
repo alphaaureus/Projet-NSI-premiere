@@ -32,7 +32,7 @@ gameicon = pygame.display.set_icon(icon)
 nomsfemmes=["Clara Cuoghi","Aurélie Gallet"]
 nomshommes=["Rayane Dahmoul","Haroun Abidi"]
 
-# Images
+# Images de personnages
 femme1=pygame.image.load('Femme1.png').convert_alpha()
 femme2=pygame.image.load('Femme2.png').convert_alpha()
 femme3=pygame.image.load('Femme3.png').convert_alpha()
@@ -47,6 +47,15 @@ homme5=pygame.image.load('Homme5.png').convert_alpha()
 imagesfemmes=[femme1,femme2,femme3,femme4]
 imageshommes=[homme1,homme2,homme3,homme4,homme5]
 
+# Images de décoration
+maternelle2=pygame.image.load('Maternelle.png').convert_alpha()
+maternelle=pygame.transform.scale(maternelle2,(925,450))
+primaire2=pygame.image.load('Primaire.png').convert_alpha()
+primaire=pygame.transform.scale(primaire2,(925,450))
+college2=pygame.image.load('College.png').convert_alpha()
+college=pygame.transform.scale(college2,(925,450))
+lycee2=pygame.image.load('Lycee.png').convert_alpha()
+lycee=pygame.transform.scale(lycee2,(925,450))
 school2=pygame.image.load('school.png').convert_alpha()
 school=pygame.transform.scale(school2,(975,500))
 interview=pygame.image.load('interview.png').convert_alpha()
@@ -543,16 +552,20 @@ def principal(sexe):
                         # Nom de l'établissement en fonction de l'age
                         # Maternelle
                         if 2 < variableage < 7:
-                            fenetreedu.blit(nommaternelle , (100,200))
+                            fenetreedu.blit(nommaternelle , (150,185))
+                            fenetreedu.blit(maternelle , (125,260))
                         # Primaire
                         if 6 < variableage < 12:
-                            fenetreedu.blit(nomprimaire , (100,200))
+                            fenetreedu.blit(nomprimaire , (150,185))
+                            fenetreedu.blit(primaire , (125,260))
                         # Collège
                         if 11 < variableage < 16:
-                            fenetreedu.blit(nomcollege , (100,200))
+                            fenetreedu.blit(nomcollege , (150,185))
+                            fenetreedu.blit(college , (125,260))
                         # Lycée
                         if 15 < variableage < 19:
-                            fenetreedu.blit(nomlycee , (100,200))
+                            fenetreedu.blit(nomlycee , (150,185))
+                            fenetreedu.blit(lycee , (125,260))
 
                         # Mise en place des rectangles des boutons qui changent de couleurs si la souris est au-dessus
                         if variableage == 19:
