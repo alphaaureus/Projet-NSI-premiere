@@ -73,11 +73,11 @@ Downloader toutes les images dans le folder images, tous les fichiers .py et ouv
 
 Le bouton guide explique les règles principales du jeu et le bouton jouer nous emmène à un menu pour sélectionner le sexe. En fonction du sexe choisi, une page principale s'ouvrira avec un personnage aléatoire. Le nom est aussi aléatoire et en fonction du sexe. Il varie entre les noms des 4 personnes du groupe. Il est possible d'appuyer sur les boutons bien être, éducation et propriété qui vous ouvriront, chacun, une autre fenêtre. Il sera possible de fermer ces fenêtres avec le bouton pour vous ramener à la page principale. Il est également possible d'appuyer sur le bouton "+ une année" pour avancer dans le jeu ce qui va changer l'âge dans le cadre en haut à gauche de la page principale. 
 
-La fenêtre éducation possède un titre qui change en fonction de l'âge, par exemple à 19 ans, le titre change d'enseignement" à "études supérieures". Des noms d'écoles sont affichés aléatoirement parmis les noms des dictionnaires. Puis en début d'université vous pouvez choisir votre spécialité. Vous aurez ainsi à 24 ans cinq choix de métiers en fonction de la spéciallité choisie.
+La fenêtre éducation possède un titre qui change en fonction de l'âge, par exemple à 19 ans, le titre change d'enseignement" à "études supérieures". Des noms d'écoles sont affichés aléatoirement parmis les noms des dictionnaires. Puis en début d'université vous pouvez choisir votre spécialité. Vous aurez ainsi à 24 ans cinq choix de métiers en fonction de la spéciallité choisie. Puis vous pouvez jouer à un jeu de vaisseaux spatiaux afin de gagner plus d'argent.
 
 La fenêtre propriété contient trois catégories d'objets, les domiciles, les transports et les animaux. Chaque catégorie contient un magasin dans lequel on peut acheter ce que l'on veut mais il y a un maximum de 7 articles.
 
-La fenêtre bien-être mène directement à un jeu de vaisseaux spatiaux afin de gagner de l'argent.
+La fenêtre bien-être n'est pas encore codée.
 
 
 
