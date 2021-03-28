@@ -48,11 +48,11 @@ imagesfemmes=[femme1,femme2,femme3,femme4]
 imageshommes=[homme1,homme2,homme3,homme4,homme5]
 
 interview=pygame.image.load('interview.png').convert_alpha()
-bannerright2=pygame.image.load('bannerright.png').convert_alpha()
+bannerright2=pygame.image.load('bannerright2.png').convert_alpha()
 bannerright=pygame.transform.scale(bannerright2,(400,600))
-bannerleft2=pygame.image.load('bannerleft.png').convert_alpha()
+bannerleft2=pygame.image.load('bannerleft2.png').convert_alpha()
 bannerleft=pygame.transform.scale(bannerleft2,(400,600))
-bannermiddle2=pygame.image.load('bannermiddle.png').convert_alpha()
+bannermiddle2=pygame.image.load('bannermiddle2.png').convert_alpha()
 bannermiddle=pygame.transform.scale(bannermiddle2,(465,200))
 
 # Theme personalisé pour les menus
@@ -228,6 +228,8 @@ def principal(sexe):
     color_red = (249,113,113)
     color_dred = (220,20,60)
     color_bred = (207,69,96)
+    game_colour1 = (105,105,105)
+    game_colour2 = (128,128,128)
 
     # Police du texte avec deux tailles différentes
     smallfont = pygame.font.SysFont('comicsansms',35)
@@ -661,9 +663,9 @@ def principal(sexe):
                             fenetreedu.blit(bannermiddle , (358,170))
                             fenetreedu.blit(nomdumetier2 , (450,250))
                             if 390 <= mouse[0] <= 390+400 and 430 <= mouse[1] <= 430+200:
-                                pygame.draw.rect(fenetreedu,color_dred,[390,430,400,200])
+                                pygame.draw.rect(fenetreedu,game_colour1,[390,430,400,200])
                             else:
-                                pygame.draw.rect(fenetreedu,color_bred,[390,430,400,200])
+                                pygame.draw.rect(fenetreedu,game_colour2,[390,430,400,200])
                             fenetreedu.blit(minijeu,(467,477))
                             fenetreedu.blit(bannerleft , (-20,170))
                             fenetreedu.blit(bannerright , (800,170))
@@ -1335,7 +1337,7 @@ def principal(sexe):
                                                         print("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'animaux")
 
 
-## Page bien-être (mini-jeu)
+## Page bien-être
 
                 # Ouverture de la page bien-être
                 if 900 <= mouse[0] <= 900+200 and 500 <= mouse[1] <= 500+50:
