@@ -33,13 +33,13 @@ Application du type "jeu de role" ou l'utilisateur se met dans la peau d'un pers
 
 ### Partage des tâches par élèves
 
-Clara------ Aide pour rechercher comment coder les éléments et transmets les informations dans le readme 
+Clara------ Aide pour rechercher comment coder les éléments et transmets les informations dans le readme.
 
-Aurélie---- Page principal et les sous-parties, écriture et relecture du readme
+Aurélie---- Page principal et les sous-parties, recherche d'informations pour les listes, écriture et relecture du readme.
 
-Haroun----- Menu principal avec les différents boutons (Jouer, options, et quitter), mini jeu (trouver le bon nombre), et travail sur la conception visuel global du jeu.
+Haroun----- Menu principal avec les différents boutons (Jouer, options, et quitter) et travail sur la conception visuelle global du jeu.
 
-Rayane----- Menu de la deuxième page avec les boutons(Homme, Femme et retour), transitions entre les différentes pages, et mini-jeu (vaisseau qui tire sur des astéroides).
+Rayane----- Menu de la deuxième page avec les boutons(Homme, Femme et retour) et mini-jeu (vaisseau qui tire sur des astéroides).
 
 
 ### 16 Semaines:
@@ -71,12 +71,13 @@ Seulement 16 semaines
 
 Downloader toutes les images dans le folder images, tous les fichiers .py et ouvrir puis éxécuter le fichier "Onlife". Pour l'instant il y a un menu avec les boutons jouer et quitter qui marchent. 
 
-Le bouton jouer nous emmène à un menu pour sélectionner le sexe. En fonction du sexe choisi, une page principale s'ouvrira avec un personnage aléatoire. Le nom est aussi aléatoire et en fonction du sexe. Il varie entre les noms des 4 personnes du groupe. Il est possible d'appuyer sur les boutons bien être, études et propriétés qui vous ouvriront, chacun, une autre fenêtre (qu'il nous faut encore personnaliser), il sera possible de fermer ces fenêtres avec le bouton pour vous ramener à la page principale. Il est également possible d'appuyer sur le bouton "+ une année" pour avancer dans le jeu ce qui va changer l'âge dans le cadre en haut à gauche de la page principale. 
+Le bouton guide explique les règles principales du jeu et le bouton jouer nous emmène à un menu pour sélectionner le sexe. En fonction du sexe choisi, une page principale s'ouvrira avec un personnage aléatoire. Le nom est aussi aléatoire et en fonction du sexe. Il varie entre les noms des 4 personnes du groupe. Il est possible d'appuyer sur les boutons bien être, éducation et propriété qui vous ouvriront, chacun, une autre fenêtre. Il sera possible de fermer ces fenêtres avec le bouton pour vous ramener à la page principale. Il est également possible d'appuyer sur le bouton "+ une année" pour avancer dans le jeu ce qui va changer l'âge dans le cadre en haut à gauche de la page principale. 
 
 La fenêtre éducation possède un titre qui change en fonction de l'âge, par exemple à 19 ans, le titre change d'enseignement" à "études supérieures". Des noms d'écoles sont affichés aléatoirement parmis les noms des dictionnaires. Puis en début d'université vous pouvez choisir votre spécialité. Vous aurez ainsi à 24 ans cinq choix de métiers en fonction de la spéciallité choisie.
 
-La fenêtre bien-être mène directement à un jeu de vaisseaux spatiaux afin de gagner de l'argent.
+La fenêtre propriété contient trois catégories d'objets, les domiciles, les transports et les animaux. Chaque catégorie contient un magasin dans lequel on peut acheter ce que l'on veut mais il y a un maximum de 7 articles.
 
+La fenêtre bien-être mène directement à un jeu de vaisseaux spatiaux afin de gagner de l'argent.
 
 
 
@@ -89,9 +90,11 @@ On a eu beaucoup de difficultés au début pour se mettre d'accord sur le jeu et
 
 ### Quelles sont celles qu'il faut absolument régler au plus vite ?
 
-Les difficultés qu'il nous faut régler assez vite sont tout d'abord de trouver un mini-jeu assez simple et supplémentaire qui nous permettra de rajouter de l'argent bonus dans notre jeu et pour le rendre plus ludique. La deuxième difficulté qu'il nous faut vite surmonter est de réussir à faire toutes les listes et les dictionnaires de chaque sous-pages. Nous avons aussi récemment decouvert un "beug" dans le jeu apres avoir fait de nombreux test sans comprendre exactement pourquoi il survient. 
+Les difficultés qu'il nous faut régler assez vite sont tout d'abord de trouver un mini-jeu assez simple et supplémentaire qui nous permettra de rajouter de l'argent bonus dans notre jeu et pour le rendre plus ludique. La deuxième difficulté qu'il nous faut vite surmonter est de réussir à faire toutes les listes et les dictionnaires de chaque sous-pages. Nous avons aussi récemment decouvert un "beug" dans le jeu après avoir fait de nombreux test sans comprendre exactement pourquoi il survient. 
 
 Mise à jour de la scéance du 16/02: Le mini-jeu est en cours de création, les listes sont faites pour la première page et il nous faut en faire pour la deuxième. Le beug est réglé.
+
+Mise à jour de la scéance du 23/03: Les listes sont toutes crées. Un autre beug survient qu'on arrive pas a reproduire. Nous devons trouver un moyen de faire apparaitre des messages d'erreur.
 
 
 
