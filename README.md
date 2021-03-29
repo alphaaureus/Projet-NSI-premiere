@@ -116,8 +116,7 @@ Nous avons des fonctions différentes reliées entre elles. Une d'elle définit 
 
 
 ##  Licenses
-This work is licensed under a
-
+This work is licensed under a GNU General Public License, version 3 (GPLv3).
 
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
