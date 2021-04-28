@@ -1,16 +1,10 @@
-#Importation des bibliothèques
+## Importation des bibliothèques
 import pygame
-import time
+from pygame.locals import *
 import pygame_menu
 import random
 from random import randint
-from pygame.locals import *
 from game import Game
-
-# Initialisation de pygame et de la music
-pygame.init()
-pygame.mixer.init()
-
 
 ## Mise en place de la fenêtre, des listes, des images, des couleurs et une variable
 
@@ -21,11 +15,8 @@ background_colour = (255,153,153)
 fenetre = pygame.display.set_mode((width,height))
 fenetre.fill(background_colour)
 gamename = pygame.display.set_caption("Onlife")
-icon = pygame.image.load('icon.png').convert_alpha()
-iconfond =pygame.transform.scale(icon,(250,250))
-gameicon = pygame.display.set_icon(icon)
 
-# Couleur blanche du texte
+# Couleurs
 color = (255,255,255)
 color2= (0,0,0)
 color_light = (170,170,170)
@@ -49,11 +40,20 @@ mediumfont = pygame.font.SysFont('comicsansms',40)
 bigfont = pygame.font.SysFont('comicsansms',50)
 bigfont2 = pygame.font.SysFont('comicsansms',60)
 
-# Listes de noms
-nomsfemmes=["Clara Cuoghi","Aurélie Gallet","Jamie Robin","Charlie Roussel","Riley Dumont","Ambre Meyer","Cléa Blanchard","Iris Martinez","Elie Roux","Manon Roger","Alice Fabre","Lina Lacroix","Maria Rolland","Rose Jacob","Lucie Rodriguez"]
-nomshommes=["Rayane Dahmoul","Haroun Abidi","Alex Martin","Claude Thomas","Sam Robert","Max Durand","Maxime Dubois","Adrien Moreau","Alexis Simon","Bastien Lopez","Arthur Fournier","Louis Girard","Oscar Clement","Ethan Blanc","Nathan Muller"]
-# Image de fond
-fondbien=pygame.image.load('Terminal.jpg')
+# Theme personalisé pour les menus
+mytheme = pygame_menu.themes.THEME_DARK.copy()
+mytheme.background_color=(255,204,204)
+mytheme.title_background_color=(255,153,153)
+mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_SIMPLE
+mytheme.title_font=pygame_menu.font.FONT_COMIC_NEUE
+mytheme.title_font_color=(0,0,0)
+mytheme.widget_font=pygame_menu.font.FONT_NEVIS
+mytheme.widget_font_color=(0,0,0)
+
+# Images de fond
+back = pygame.image.load('image1.jpg') #Page mini-jeu
+background =pygame.transform.scale(back,(width,height))
+fondbien=pygame.image.load('Terminal.jpg') #Page bien-être
 fondbienetre=pygame.transform.scale(fondbien,(1150,750))
 
 # Images de personnages
@@ -68,10 +68,10 @@ homme3=pygame.image.load('Homme3.png').convert_alpha()
 homme4=pygame.image.load('Homme4.png').convert_alpha()
 homme5=pygame.image.load('Homme5.png').convert_alpha()
 
-imagesfemmes=[femme1,femme2,femme3,femme4]
-imageshommes=[homme1,homme2,homme3,homme4,homme5]
-
 # Images de décoration
+icon = pygame.image.load('icon.png').convert_alpha()
+iconfond =pygame.transform.scale(icon,(250,250))
+gameicon = pygame.display.set_icon(icon)
 maternelle2=pygame.image.load('Maternelle.png').convert_alpha()
 maternelle=pygame.transform.scale(maternelle2,(925,450))
 primaire2=pygame.image.load('Primaire.png').convert_alpha()
@@ -134,20 +134,18 @@ australia=pygame.transform.scale(australia1,(200,120))
 austria1=pygame.image.load('austria.png')
 austria=pygame.transform.scale(austria1,(200,120))
 
-# Theme personalisé pour les menus
-mytheme = pygame_menu.themes.THEME_DARK.copy()
-mytheme.background_color=(255,204,204)
-mytheme.title_background_color=(255,153,153)
-mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_SIMPLE
-mytheme.title_font=pygame_menu.font.FONT_COMIC_NEUE
-mytheme.title_font_color=(0,0,0)
-mytheme.widget_font=pygame_menu.font.FONT_NEVIS
-mytheme.widget_font_color=(0,0,0)
-
 # Variable pour le sexe choisis
 sexe = 0
 
-#Listes pour la page enseignement
+# Listes de noms
+nomsfemmes=["Clara Cuoghi","Aurélie Gallet","Jamie Robin","Charlie Roussel","Riley Dumont","Ambre Meyer","Cléa Blanchard","Iris Martinez","Elie Roux","Manon Roger","Alice Fabre","Lina Lacroix","Maria Rolland","Rose Jacob","Lucie Rodriguez"]
+nomshommes=["Rayane Dahmoul","Haroun Abidi","Alex Martin","Claude Thomas","Sam Robert","Max Durand","Maxime Dubois","Adrien Moreau","Alexis Simon","Bastien Lopez","Arthur Fournier","Louis Girard","Oscar Clement","Ethan Blanc","Nathan Muller"]
+
+# Liste des personnages
+imagesfemmes=[femme1,femme2,femme3,femme4]
+imageshommes=[homme1,homme2,homme3,homme4,homme5]
+
+# Listes pour la page enseignement
 listematernelle=["Ecole maternelle Béré","Ecole maternelle Le Coudray","Ecole maternelle Henri Bergson","Ecole maternelle Jules Ferry","Ecole maternelle Claude Monet","Ecole maternelle Prince Bois","Ecole maternelle Le Bourgeau","Ecole maternelle du Massif","Ecole maternelle Molière","Ecole maternelle du Centre"]
 listeprimaire=["Ecole primaire Guillaume Apollinaire","Ecole primaire Michel Servet","Ecole primaire Albert Barraud","Ecoles primaire les Néréides","Ecole primaire Jean Jaurès","Ecole primaire Jacques Prévert","Ecole primaire Charles Perrault","Ecole primaire La Clé des Champs","Ecole primaire Les Nondales","Ecole primaire L'Arbre Enchanté"]
 listecollege=["Collège Chaptal","Collège Plaisance","Collège Jean Giono","Collège les Fontainettes","Collège Victor Hugo","Collège des Trois Vallées","Collège la Sablière","Collège Antoine de Saint-Exupéry","Collège Claude Nicolas le Doux","Collège Les Franchises"]
@@ -158,24 +156,40 @@ listedomicile=[["Studio - 1",98],["Studio - 2",127],["Studio - 3",75],["Studio -
 listetransport=[["Vélo - 1",1.75],["Vélo - 2",4.6],["Moto - 1",5.9],["Moto - 2",10.3],["Berline - 1",15.5],["Berline - 2",22.3],["Break - 1",16.6],["Break - 2",19.2],["Monospace - 1",23.6],["Monospace - 2",28.1],["Citadines - 1",16.2],["Citadines - 2",22.9],["4x4 - 1",29],["4x4 - 2",31.8],["Limousine - 1",47],["Limousine - 2",72],["Bateau - 1",159],["Bateau - 2",385],["Jet Privé - 1",2950],["Jet Privé - 2",5000]]
 listeanimal=[["Chien - 1",1],["Chien - 2",1.5],["Chat - 1",1],["Chat - 2",1.25],["Poisson - 1",0.15],["Poisson - 2",0.25],["Furet - 1",2.5],["Furet - 2",3.25],["Cheval - 1",6],["Cheval - 2",9.75],["Lapin - 1",3.5],["Lapin - 2",4.45],["Hamster - 1",1.7],["Hamster - 2",2.25],["Oiseau - 1",5.25],["Oiseau - 2",8.75],["Poule - 1",0.2],["Poule - 2",0.5],["Cochon - 1",3.75],["Cochon - 2",6.5]]
 
-# Dictionnaire des pays
-file=open("voyage.csv","r",encoding='UTF-8-sig') #on ouvre le fichier
-optionsvoyage=file.readline().rstrip().split(';') # on lit la première ligne, on enlève le \n, on découpe à chaque ; et on met le résultat dans optionsvoyage
-lignes=file.readlines() # on lit toutes les lignes
-contenuvoyage=[] # on crée une table vide
-for ligne in lignes : #on itère la variable ligne sur chaque élément de lignes
-    liste=ligne.rstrip().split(';') #on crée la liste sans retour à la ligne
-    contenuvoyage.append(liste) #on ajoute la liste obtenue à contenuvoyage
-file.close() # on ferme le fichier
+# Fichier csv des pays
+file=open("voyage.csv","r",encoding='UTF-8-sig') #On ouvre le fichier
+optionsvoyage=file.readline().rstrip().split(';') # On lit la première ligne, on enlève le \n, on découpe à chaque ; et on met le résultat dans optionsvoyage
+lignes=file.readlines() # On lit toutes les lignes
+contenuvoyage=[] # On crée une table vide
+for ligne in lignes : # On itère la variable ligne sur chaque élément de lignes
+    liste=ligne.rstrip().split(';') # On crée la liste sans retour à la ligne
+    contenuvoyage.append(liste) # On ajoute la liste obtenue à contenuvoyage
+file.close() # On ferme le fichier
 
 #Musique
 song1 = "bensound-onceagain.mp3"
 song2 = "musiquedefond.mp3"
 
 
-## Fonction menu
+## Fonction du début du jeu (premier menu)
+# Code pour le menu du départ en utilisant la bibliothèque pygame_menu
 
+def depart():
+    pygame.mixer.init()
+    pygame.mixer.music.load(song1)
+    pygame.mixer.music.set_volume(0.1)
+    pygame.mixer.music.play(-1)
+    menu = pygame_menu.Menu(800, 1200, 'ONLIFE',theme=mytheme)
+    logo= menu.add_image('icon.png')
+    menu.add_button('Jouer', sexe)
+    menu.add_button('Guide', guide_du_jeu)
+    menu.add_button('Quitter', pygame_menu.events.EXIT)
+    menu.mainloop(fenetre)
+
+
+## Fonction du sexe (deuxième menu)
 # Code pour faire tourner la fonction menu pour choisir le sexe
+
 def sexe():
     pygame.init()
     pygame.mixer.init()
@@ -189,35 +203,34 @@ def sexe():
     ecran.mainloop(fenetre)
 
 
-## Fonction option
+## Fonction guide du jeu
+#Fonction pour afficher une présentation du jeu
 
-#Fonction option à remplir
-def option_the_game():
+def guide_du_jeu():
     # Textes
-    retour = smallfont.render('retour' , True , color)
-    ligne1 = bigfont.render('Bienvenu à Onlife!' , True , color2)
-    ligne2 = minifont.render("Le jeu où vous pouvez vivre la vie dont vous avez tant rêvé!", True , color2)
-    ligne3 = minifont.render("Vous commencez à l'an 0 avec une somme aléatoire d'argent.", True , color2)
-    ligne4 = minifont.render("Pour grandir d'une année, appuyez sur la touche '+ une année'.", True , color2)
-    ligne5 = minifont.render("Au fil de votre vie, vous pouvez choisir vos études, votre métier et jouer au mini-jeu.", True , color2)
-    ligne6 = minifont.render("Vous avez 100 ans pour vous amuser le plus possible!", True , color2)
-    ligne7 = mediumfont.render('Éducation:' , True , color2)
-    ligne8 = minifont.render("Vous commencez à 3 ans, vous allez à la maternelle, en primaire, au collège puis au lycée.", True , color2)
-    ligne9 = minifont.render("À 19 ans, vous pouvez choisir votre spécialité et à 23 ans, votre métier.", True , color2)
-    ligne10 = minifont.render("Vous pouvez ensuite jouer à un mini-jeu complémentaire pour gagner de l'argent.", True , color2)
-    ligne11 = mediumfont.render('Propriété:' , True , color2)
-    ligne12 = minifont.render("Il y a trois catégories de propriété: 'domicile', 'transport', 'animal'.", True , color2)
-    ligne13 = minifont.render("Vous pouvez vous rendre en magasin pour acheter un maximum de 7 articles par catégorie.", True , color2)
-    ligne14 = mediumfont.render('Bien-être:' , True , color2)
-    ligne15 = minifont.render("Ici, vous pouvez choisir votre voyage pour partir aux quatre coins du monde.", True , color2)
+    retour = smallfont.render('retour' , True , color) #Création du texte
+    ligne1 = bigfont.render('Bienvenu à Onlife!' , True , color2) #Création du texte
+    ligne2 = minifont.render("Le jeu où vous pouvez vivre la vie dont vous avez tant rêvé!", True , color2) #Création du texte
+    ligne3 = minifont.render("Vous commencez à l'an 0 avec une somme aléatoire d'argent.", True , color2) #Création du texte
+    ligne4 = minifont.render("Pour grandir d'une année, appuyez sur la touche '+ une année'.", True , color2) #Création du texte
+    ligne5 = minifont.render("Au fil de votre vie, vous pouvez choisir vos études, votre métier et jouer au mini-jeu.", True , color2) #Création du texte
+    ligne6 = minifont.render("Vous avez 100 ans pour vous amuser le plus possible!", True , color2) #Création du texte
+    ligne7 = mediumfont.render('Éducation:' , True , color2) #Création du texte
+    ligne8 = minifont.render("Vous commencez à 3 ans, vous allez à la maternelle, en primaire, au collège puis au lycée.", True , color2) #Création du texte
+    ligne9 = minifont.render("À 19 ans, vous pouvez choisir votre spécialité et à 23 ans, votre métier.", True , color2) #Création du texte
+    ligne10 = minifont.render("Vous pouvez ensuite jouer à un mini-jeu complémentaire pour gagner de l'argent.", True , color2) #Création du texte
+    ligne11 = mediumfont.render('Propriété:' , True , color2) #Création du texte
+    ligne12 = minifont.render("Il y a trois catégories de propriété: 'domicile', 'transport', 'animal'.", True , color2) #Création du texte
+    ligne13 = minifont.render("Vous pouvez vous rendre en magasin pour acheter un maximum de 7 articles par catégorie.", True , color2) #Création du texte
+    ligne14 = mediumfont.render('Bien-être:' , True , color2) #Création du texte
+    ligne15 = minifont.render("Ici, vous pouvez choisir votre voyage pour partir aux quatre coins du monde.", True , color2) #Création du texte
 
-
-    # Variable pour la boucle option
-    optionfin=False
-
-    while not optionfin:
+    # Variable pour la boucle guide
+    guide=True
+    # Boucle pour faire tourner la page du guide
+    while guide:
+        # Mise en place de l'affichage de la fenêtre
         pygame.display.update()
-        # Mise en place de l'affichage de la fenêtre principale
         fenetreoption = pygame.display.set_mode((width,height))
         fenetreoption.fill(background_colour)
         pygame.draw.rect(fenetreoption, (255,204,204), pygame.Rect(35, 35, width-70, height-70))
@@ -249,62 +262,72 @@ def option_the_game():
         fenetreoption.blit(retour , (60,50))
 
         # Détection d'événements
-        for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
-            if event.type == QUIT:     #Si un de ces événements est de type QUIT
-                optionfin = True      #On arrête la boucle
-                pygame.display.quit() #On ferme le display
+        for event in pygame.event.get():   # On parcours la liste de tous les événements reçus
+            if event.type == QUIT:     # Si un de ces événements est de type QUIT
+                guide = False      # On arrête la boucle
+                pygame.display.quit() # On ferme le display
 
             # Vérifie si la souris est cliquée
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Bouton retour
                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                     pygame.display.update()
-                    optionfin=True
+                    guide=False
                     depart()
 
+
 ## Fonction du magasin
+#Fonction pour acheter et revendre des articles
+
 def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,transport,animaux):
-    themagasin=True
+    # Textes
+    magasin = bigfont.render('Magasin' , True , color) #Création du texte
+    retour = smallfont.render('retour' , True , color) #Création du texte
+    maximummag = minifont2.render("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'articles!" , True , color_dark) #Création du texte
+    instructions = minifont2.render("Cliquez pour acheter et recliquez pour revendre à -30%. 7 articles maximum." , True , color_dark) #Création du texte
+
     # Variables
-    listemagasin=liste
-    erreurmag = 0
-    choixmagasin=choixliste
-    variableargent=argent
+    erreurmag = 0 # Variable pour le message d'erreur
+    listemagasin=liste # La liste de la catégorie d'article varie en fonction de la liste entrée en argument de la fonction lemagasin
+    choixmagasin=choixliste # La variable choixmagasin varie en fonction de la variable choixliste entrée en argument de la fonction lemagasin et permet de réguler et détecter les articles déjà achetés
+    variableargent=argent # La somme d'argent est determinée en fonction de la somme entrée en argument de la fonction lemagasin
 
-    #Textes
-    magasin = bigfont.render('Magasin' , True , color)
-    retour = smallfont.render('retour' , True , color)
-    maximummag = minifont2.render("Vous n'avez pas assez d'argent ou vous avez atteint le maximum d'articles!" , True , color_dark)
-    instructions = minifont2.render("Cliquez pour acheter et recliquez pour revendre à -30%. 7 articles maximum." , True , color_dark)
+    # Variable pour la boucle magasin
+    themagasin=True
 
+    # Boucle pour faire tourner la page du magasin
     while themagasin:
+        # Mise en place de l'affichage de la fenêtre
         pygame.display.update()
         fenetremag = pygame.display.set_mode((width,height))
         fenetremag.fill(background_colour)
+        # Détection de la position de la souris
         mouse = pygame.mouse.get_pos()
-        #Titre
+
+        # Titre
         pygame.draw.rect(fenetremag,color_dark,[230,25,900,100])
         fenetremag.blit(magasin , (580,40))
+
         # Instructions
         fenetremag.blit(instructions , (65,140))
-        # Affichage des options d'articles
-        x=0
-        largeur=75
 
-        for i in range (2):
+        # Affichage des options d'articles
+        article=0
+        largeur=75
+        for i in range (2): # Distribution en deux colonnes
             hauteur=200
-            for i in range (10):
-                lemagasintexte1 = smallfont.render(listemagasin[x][0] , True , color)
-                lemagasintexte2 = smallfont.render(str(listemagasin[x][1])+" K" , True , color)
+            for i in range (10): # Chaque colonne comporte 10 articles
+                nomdelarticle1 = smallfont.render(listemagasin[article][0] , True , color)#Création du texte
+                nomdelarticle2 = smallfont.render(str(listemagasin[article][1])+" K" , True , color)#Création du texte
                 # Rectangle de couleur différente pour savoir si l'objet à déjà été acheté
-                if listemagasin[x][0] in choixmagasin:
+                if listemagasin[article][0] in choixmagasin: # Détection si l'article est déjà acheté
                     pygame.draw.rect(fenetremag,color_dred,[largeur-10,hauteur+5,460,43])
                 else:
                     pygame.draw.rect(fenetremag,color_bred,[largeur-10,hauteur+5,460,43])
-                fenetremag.blit(lemagasintexte1 , (largeur,hauteur))
-                fenetremag.blit(lemagasintexte2 , (largeur+330,hauteur))
+                fenetremag.blit(nomdelarticle1 , (largeur,hauteur))
+                fenetremag.blit(nomdelarticle2 , (largeur+330,hauteur))
                 hauteur=hauteur+50
-                x=x+1
+                article=article+1
             largeur=largeur+600
 
         # Bouton retour à la page propriété
@@ -314,6 +337,10 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
             pygame.draw.rect(fenetremag,color_dark,[50,50,125,50])
         fenetremag.blit(retour , (60,50))
 
+        # Blit des erreurs
+        if erreurmag == 1:
+            fenetremag.blit(maximummag , (60,720))
+
         # Boucle pour les évènements
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -321,14 +348,17 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                 if 50 <= mouse[0] <= 125+50 and 50 <= mouse[1] <= 50+50:
                     pygame.display.update()
                     mag=False
-                    if num == 1:
+                    if num == 1: # Change le contenu des listes d'articles achetés en fonction de la catégorie d'article
                         principal(sexe,perso,nom,age,variableargent,salaire,nomlycee,spe,metier,choixmagasin,transport,animaux)
-                    elif num == 2:
+                    elif num == 2: # Change le contenu des listes d'articles achetés en fonction de la catégorie d'article
                         principal(sexe,perso,nom,age,variableargent,salaire,nomlycee,spe,metier,domicile,choixmagasin,animaux)
-                    elif num == 3:
+                    elif num == 3: # Change le contenu des listes d'articles achetés en fonction de la catégorie d'article
                         principal(sexe,perso,nom,age,variableargent,salaire,nomlycee,spe,metier,domicile,transport,choixmagasin)
 
-                # Détection choix du domicile
+                # Détection choix de l'article
+                # --> Détecte d'abords si le joueur a assez d'argent et si l'article est déjà acheté
+                # --> Si le joueur possède l'article et souhaite le revendre
+                # --> Affiche un message d'erreur si les conditions d'achat ne sont pas respectés
                 #1
                 if 65 <= mouse[0] <= 460+65 and 205 <= mouse[1] <= 43+205:
                     if variableargent > (listemagasin[0][1]*1000) and len(choixmagasin)<7 and listemagasin[0][0] not in choixmagasin:
@@ -340,7 +370,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[0][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #2
                 if 65 <= mouse[0] <= 460+65 and 255 <= mouse[1] <= 43+255:
                     if variableargent > (listemagasin[1][1]*1000) and len(choixmagasin)<7 and listemagasin[1][0] not in choixmagasin:
@@ -352,7 +382,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[1][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #3
                 if 65 <= mouse[0] <= 460+65 and 305 <= mouse[1] <= 43+305:
                     if variableargent > (listemagasin[2][1]*1000) and len(choixmagasin)<7 and listemagasin[2][0] not in choixmagasin:
@@ -364,7 +394,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[2][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #4
                 if 65 <= mouse[0] <= 460+65 and 355 <= mouse[1] <= 43+355:
                     if variableargent > (listemagasin[3][1]*1000) and len(choixmagasin)<7 and listemagasin[3][0] not in choixmagasin:
@@ -376,7 +406,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[3][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #5
                 if 65 <= mouse[0] <= 460+65 and 405 <= mouse[1] <= 43+405:
                     if variableargent > (listemagasin[4][1]*1000) and len(choixmagasin)<7 and listemagasin[4][0] not in choixmagasin:
@@ -388,7 +418,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[4][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #6
                 if 65 <= mouse[0] <= 460+65 and 455 <= mouse[1] <= 43+455:
                     if variableargent > (listemagasin[5][1]*1000) and len(choixmagasin)<7 and listemagasin[5][0] not in choixmagasin:
@@ -400,7 +430,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[5][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #7
                 if 65 <= mouse[0] <= 460+65 and 505 <= mouse[1] <= 43+505:
                     if variableargent > (listemagasin[6][1]*1000) and len(choixmagasin)<7 and listemagasin[6][0] not in choixmagasin:
@@ -412,7 +442,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[6][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #8
                 if 65 <= mouse[0] <= 460+65 and 555 <= mouse[1] <= 43+555:
                     if variableargent > (listemagasin[7][1]*1000) and len(choixmagasin)<7 and listemagasin[7][0] not in choixmagasin:
@@ -424,7 +454,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[7][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #9
                 if 65 <= mouse[0] <= 460+65 and 605 <= mouse[1] <= 43+605:
                     if variableargent > (listemagasin[8][1]*1000) and len(choixmagasin)<7 and listemagasin[8][0] not in choixmagasin:
@@ -436,7 +466,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[8][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #10
                 if 65 <= mouse[0] <= 460+65 and 655 <= mouse[1] <= 43+655:
                     if variableargent > (listemagasin[9][1]*1000) and len(choixmagasin)<7 and listemagasin[9][0] not in choixmagasin:
@@ -448,7 +478,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[9][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #11
                 if 665 <= mouse[0] <= 460+665 and 205 <= mouse[1] <= 43+205:
                     if variableargent > (listemagasin[10][1]*1000) and len(choixmagasin)<7 and listemagasin[10][0] not in choixmagasin:
@@ -460,7 +490,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[10][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #12
                 if 665 <= mouse[0] <= 460+665 and 255 <= mouse[1] <= 43+255:
                     if variableargent > (listemagasin[11][1]*1000) and len(choixmagasin)<7 and listemagasin[11][0] not in choixmagasin:
@@ -472,7 +502,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[11][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #13
                 if 665 <= mouse[0] <= 460+665 and 305 <= mouse[1] <= 43+305:
                     if variableargent > (listemagasin[12][1]*1000) and len(choixmagasin)<7 and listemagasin[12][0] not in choixmagasin:
@@ -484,7 +514,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[12][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #14
                 if 665 <= mouse[0] <= 460+665 and 355 <= mouse[1] <= 43+355:
                     if variableargent > (listemagasin[13][1]*1000) and len(choixmagasin)<7 and listemagasin[13][0] not in choixmagasin:
@@ -496,7 +526,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[13][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #15
                 if 665 <= mouse[0] <= 460+665 and 405 <= mouse[1] <= 43+405:
                     if variableargent > (listemagasin[14][1]*1000) and len(choixmagasin)<7 and listemagasin[14][0] not in choixmagasin:
@@ -508,7 +538,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[14][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #16
                 if 665 <= mouse[0] <= 460+665 and 455 <= mouse[1] <= 43+455:
                     if variableargent > (listemagasin[15][1]*1000) and len(choixmagasin)<7 and listemagasin[15][0] not in choixmagasin:
@@ -520,7 +550,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[15][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #17
                 if 665 <= mouse[0] <= 460+665 and 505 <= mouse[1] <= 43+505:
                     if variableargent > (listemagasin[16][1]*1000) and len(choixmagasin)<7 and listemagasin[16][0] not in choixmagasin:
@@ -532,7 +562,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[16][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #18
                 if 665 <= mouse[0] <= 460+665 and 555 <= mouse[1] <= 43+555:
                     if variableargent > (listemagasin[17][1]*1000) and len(choixmagasin)<7 and listemagasin[17][0] not in choixmagasin:
@@ -544,7 +574,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[17][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #19
                 if 665 <= mouse[0] <= 460+665 and 605 <= mouse[1] <= 43+605:
                     if variableargent > (listemagasin[18][1]*1000) and len(choixmagasin)<7 and listemagasin[18][0] not in choixmagasin:
@@ -556,7 +586,7 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[18][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
                 #20
                 if 665 <= mouse[0] <= 460+665 and 655 <= mouse[1] <= 43+655:
                     if variableargent > (listemagasin[19][1]*1000) and len(choixmagasin)<7 and listemagasin[19][0] not in choixmagasin:
@@ -568,34 +598,36 @@ def lemagasin(num,liste,choixliste,sexe,perso,nom,age,argent,salaire,nomlycee,sp
                         choixmagasin.remove(listemagasin[19][0])
                         erreurmag=0
                     else:
-                        erreurmag=erreurmag+1
+                        erreurmag=1
 
-        # Blit des erreurs
-        if erreurmag > 0:
-            fenetremag.blit(maximummag , (60,720))
 
 ## Fonction du voyage
-voyage=False
-def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,transport,animaux,laclasse,laduree,lanourriture,lactivite,lestransport):
+#Fonction pour pouvoir voyager dans une sélection de 20 pays
+
+def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,transport,animaux):
+    # Variables
+    erreuroptions=0 # Variable pour les erreurs
+    erreurargent=0 # Variable pour les erreurs
+    laclasse=0 # Variable pour détecter le choix de la classe
+    laduree=0 # Variable pour détecter le choix de la durée
+    lanourriture=0 # Variable pour détecter le choix du moyen de restauration
+    lactivite=0 # Variable pour détecter le choix du nombre d'activités
+    letransport=0 # Variable pour détecter le choix du moyen de transport
+    variableargent=argent # La somme d'argent est determinée en fonction de la somme entrée en argument de la fonction levoyage
+
+    # Variable pour la boucle voyage
     voyage=True
-    #Variable pour les erreurs
-    erreur3=0
-    erreur4=0
+
+    # Boucle pour faire tourner la page des options du voyage
     while voyage:
+        # Mise en place de l'affichage de la fenêtre
         pygame.display.update()
         fenetrevoyage = pygame.display.set_mode((width,height))
         fenetrevoyage.fill(background_colour)
+        # Détection de la position de la souris
         mouse = pygame.mouse.get_pos()
 
-        #Variables
-        laclasse=laclasse
-        laduree=laduree
-        lanourriture=lanourriture
-        lactivite=lactivite
-        lestransport=lestransport
-        variableargent=argent
-
-        #Texte
+        # Textes
         lepays = mediumfont.render(contenuvoyage[pays][0] , True , color) # Extraction des options de la liste et création du texte
         lepayscode = mediumfont.render(contenuvoyage[pays][1] , True , color) # Extraction des options de la liste et création du texte
         classe = smallfont.render("Classe :" , True , color) # Création du texte
@@ -619,7 +651,7 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
         activite6 = smallfont.render(optionsvoyage[16] , True , color) # Extraction des options de la liste et création du texte
         activite8 = smallfont.render(optionsvoyage[17] , True , color) # Extraction des options de la liste et création du texte
         activite10 = smallfont.render(optionsvoyage[18] , True , color) # Extraction des options de la liste et création du texte
-        letransport = smallfont.render("Transport :" , True , color) # Création du texte
+        transport = smallfont.render("Transport :" , True , color) # Création du texte
         taxis = smallfont.render(optionsvoyage[19] , True , color) # Extraction des options de la liste et création du texte
         chauffeur = smallfont.render(optionsvoyage[20] , True , color) # Extraction des options de la liste et création du texte
         annuler = mediumfont.render("Annuler" , True , color) # Création du texte
@@ -627,12 +659,14 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
         choixmanquant = minifont2.render("Veuillez sélectionner un choix pour toutes les catégories." , True , color_dark) # Création du texte
         toopoortotravel = minifont2.render("Vous n'avez pas assez d'argent, veuillez annuler." , True , color_dark) # Création du texte
 
-        #Décoration
+        # Titre
         pygame.draw.rect(fenetrevoyage,color_dred,[300,25,600,80])
         fenetrevoyage.blit(lepays , (325,35))
         fenetrevoyage.blit(lepayscode , (795,35))
 
-        #Classe
+        # Classe
+        fenetrevoyage.blit(classe , (190,150))
+        # Boutons de sélection de la classe
         if laclasse == 1:
             pygame.draw.rect(fenetrevoyage,color_bred,[357,150,178,50])
         else:
@@ -645,13 +679,13 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
             pygame.draw.rect(fenetrevoyage,color_bred,[820,150,175,50])
         else:
             pygame.draw.rect(fenetrevoyage,color_dred,[820,150,175,50])
-
-        fenetrevoyage.blit(classe , (190,150))
         fenetrevoyage.blit(economy , (370,150))
         fenetrevoyage.blit(business , (605,150))
         fenetrevoyage.blit(first , (835,150))
 
-        #Durée
+        # Durée
+        fenetrevoyage.blit(duree , (170,250))
+        # Boutons de sélection de la durée
         if laduree == 1:
             pygame.draw.rect(fenetrevoyage,color_bred,[340,254,60,50])
         else:
@@ -680,8 +714,6 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
             pygame.draw.rect(fenetrevoyage,color_bred,[942,254,65,50])
         else:
             pygame.draw.rect(fenetrevoyage,color_dred,[942,254,65,50])
-
-        fenetrevoyage.blit(duree , (170,250))
         fenetrevoyage.blit(deux , (350,250))
         fenetrevoyage.blit(trois , (450,250))
         fenetrevoyage.blit(quatre , (550,250))
@@ -690,7 +722,9 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
         fenetrevoyage.blit(sept , (850,250))
         fenetrevoyage.blit(quatorze , (950,250))
 
-        #Nourriture
+        # Nourriture
+        fenetrevoyage.blit(nourriture , (200,350))
+        # Boutons de sélection du moyen de restauration
         if lanourriture == 1:
             pygame.draw.rect(fenetrevoyage,color_bred,[440,351,270,53])
         else:
@@ -699,12 +733,12 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
             pygame.draw.rect(fenetrevoyage,color_bred,[755,351,220,53])
         else:
             pygame.draw.rect(fenetrevoyage,color_dred,[755,351,220,53])
-
-        fenetrevoyage.blit(nourriture , (200,350))
         fenetrevoyage.blit(repas , (455,350))
         fenetrevoyage.blit(restaurant , (770,350))
 
-        #Activités
+        # Activités
+        fenetrevoyage.blit(activite , (225,450))
+        # Boutons de sélection du nombre d'activités
         if lactivite == 1:
             pygame.draw.rect(fenetrevoyage,color_bred,[460,450,50,50])
         else:
@@ -725,29 +759,27 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
             pygame.draw.rect(fenetrevoyage,color_bred,[867,450,53,50])
         else:
             pygame.draw.rect(fenetrevoyage,color_dred,[867,450,53,50])
-
-        fenetrevoyage.blit(activite , (225,450))
         fenetrevoyage.blit(activite2 , (475,450))
         fenetrevoyage.blit(activite4 , (575,450))
         fenetrevoyage.blit(activite6 , (675,450))
         fenetrevoyage.blit(activite8 , (775,450))
         fenetrevoyage.blit(activite10 , (875,450))
 
-        #Transport
-        if lestransport == 1:
+        # Transport
+        fenetrevoyage.blit(transport , (260,550))
+        # Boutons de sélection du moyen de transport
+        if letransport == 1:
             pygame.draw.rect(fenetrevoyage,color_bred,[512,550,120,49])
         else:
             pygame.draw.rect(fenetrevoyage,color_dred,[512,550,120,49])
-        if lestransport == 2:
+        if letransport == 2:
             pygame.draw.rect(fenetrevoyage,color_bred,[680,550,190,52])
         else:
             pygame.draw.rect(fenetrevoyage,color_dred,[680,550,190,52])
-
-        fenetrevoyage.blit(letransport , (260,550))
         fenetrevoyage.blit(taxis , (525,550))
         fenetrevoyage.blit(chauffeur , (695,550))
 
-        #Annuler ou valider
+        # Boutons annuler ou valider
         if 300 <= mouse[0] <= 200+300 and 660 <= mouse[1] <= 75+660:
             pygame.draw.rect(fenetrevoyage,color_crimson,[300,660,200,75])
         else:
@@ -761,7 +793,7 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
         fenetrevoyage.blit(valider , (733,665))
 
         #Afficher le message d'erreur
-        if erreur3 > 0:
+        if erreuroptions > 0:
             fenetrevoyage.blit(choixmanquant , (200,745))
 
         # Détection d'événements
@@ -811,13 +843,13 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
                     lactivite=5
                 #Transport
                 if 512 <= mouse[0] <= 120+512 and 550 <= mouse[1] <= 49+550:
-                    lestransport=1
+                    letransport=1
                 if 680 <= mouse[0] <= 190+680 and 550 <= mouse[1] <= 52+550:
-                    lestransport=2
+                    letransport=2
                 #Valider
                 if 700 <= mouse[0] <= 200+700 and 660 <= mouse[1] <= 75+660:
-                    if laclasse==0 or laduree==0 or lanourriture==0 or lactivite==0 or lestransport==0:
-                        erreur3=1
+                    if laclasse==0 or laduree==0 or lanourriture==0 or lactivite==0 or letransport==0:
+                        erreuroptions=1
                     else:
                         prixvoy=True
                         while prixvoy:
@@ -825,20 +857,25 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
                             fenetrevoyage = pygame.display.set_mode((width,height))
                             fenetrevoyage.fill(background_colour)
                             mouse = pygame.mouse.get_pos()
-                            voyageprix=(int(contenuvoyage[pays][1+laclasse]))+(int(contenuvoyage[pays][4+laduree])*int(contenuvoyage[pays][11+lanourriture]))+(int(contenuvoyage[pays][13+lactivite]))+(int(contenuvoyage[pays][4+laduree])*int(contenuvoyage[pays][18+lestransport]))+(int(contenuvoyage[pays][4+laduree])*int(contenuvoyage[pays][21]))
+
+                            #Calcul du montant du voyage selon les options
+                            voyageprix=(int(contenuvoyage[pays][1+laclasse]))+(int(contenuvoyage[pays][4+laduree])*int(contenuvoyage[pays][11+lanourriture]))+(int(contenuvoyage[pays][13+lactivite]))+(int(contenuvoyage[pays][4+laduree])*int(contenuvoyage[pays][18+letransport]))+(int(contenuvoyage[pays][4+laduree])*int(contenuvoyage[pays][21]))
+
+                            #Création des textes pour la page
                             afficherprixvoyage1 = bigfont2.render("Compte Rendu :" , True , color2) # Création du texte
                             afficherprixvoyage01 = mediumfont.render("Destination : "+str(contenuvoyage[pays][0]) , True , color2) # Création du texte
                             afficherprixvoyage2 = mediumfont.render("Classe : " + optionsvoyage[1+laclasse], True , color2) # Création du texte
                             afficherprixvoyage3 = mediumfont.render("Durée : " + optionsvoyage[4+laduree], True , color2) # Création du texte
                             afficherprixvoyage4 = mediumfont.render("Nourriture : " + optionsvoyage[11+lanourriture], True , color2) # Création du texte
                             afficherprixvoyage5 = mediumfont.render("Activités : " + optionsvoyage[13+lactivite], True , color2) # Création du texte
-                            afficherprixvoyage6 = mediumfont.render("Transport : " + optionsvoyage[18+lestransport], True , color2) # Création du texte
+                            afficherprixvoyage6 = mediumfont.render("Transport : " + optionsvoyage[18+letransport], True , color2) # Création du texte
                             afficherprixvoyage7 = smallfont.render("Prix Hôtel : "+ str(contenuvoyage[pays][4+laduree])+ "x" + str(contenuvoyage[pays][21]), True , color2) # Création du texte
                             afficherprixvoyage8 = smallfont.render("(nb de jours x prix par nuit)" , True , color2) # Création du texte
                             afficherprixvoyage9 = bigfont2.render("Prix :" , True , color2) # Création du texte
                             afficherprixvoyage10 = bigfont2.render(str(voyageprix) + "€" , True , color2) # Création du texte
                             fenetrevoyage.blit(traveling , (600,40))
 
+                            #Blit des textes sur l'écran
                             fenetrevoyage.blit(afficherprixvoyage1 , (50,20))
                             fenetrevoyage.blit(afficherprixvoyage01 , (50,100))
                             fenetrevoyage.blit(afficherprixvoyage2 , (50,150))
@@ -865,7 +902,7 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
                             fenetrevoyage.blit(valider , (733,665))
 
                             #Afficher le message d'erreur
-                            if erreur4 > 0:
+                            if erreurargent > 0:
                                 fenetrevoyage.blit(toopoortotravel , (260,745))
 
                             # Détection d'événements
@@ -878,7 +915,7 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile
                                     #Valider
                                     if 700 <= mouse[0] <= 200+700 and 660 <= mouse[1] <= 75+660:
                                         if variableargent < voyageprix:
-                                            erreur4=1
+                                            erreurargent=1
                                         else:
                                             variableargent=variableargent-voyageprix
                                             principal(sexe,perso,nom,age,variableargent,salaire,nomlycee,spe,metier,domicile,transport,animaux)
@@ -984,13 +1021,13 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
     tropjeune2 = bigfont.render('pour acheter des articles!' , True , color)
     propriete = smallfont.render('Propriété' , True , color)
     proprietebig = bigfont.render('Propriété' , True , color)
-    domicile = smallfont.render('Domicile:' , True , color)
-    transport = smallfont.render('Transport:' , True , color)
-    animal = smallfont.render('Animaux:' , True , color)
+    domicile1 = smallfont.render('Domicile:' , True , color)
+    domicile2 = smallfont.render('domicile' , True , color)
+    transport1 = smallfont.render('Transport:' , True , color)
+    transport2 = smallfont.render('transport' , True , color)
+    animal1 = smallfont.render('Animaux:' , True , color)
+    animal2 = smallfont.render('animal' , True , color)
     aucun = smallfont.render("Vous n'avez aucun" , True , color)
-    domicile1 = smallfont.render('domicile' , True , color)
-    transport1 = smallfont.render('transport' , True , color)
-    animal1 = smallfont.render('animal' , True , color)
     acheter = smallfont.render('Acheter un' , True , color)
 
     # Texte de la page bien-être
@@ -1134,10 +1171,6 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                                             # création de la fenêtre
                                             pygame.display.update()
                                             fenetrejeu = pygame.display.set_mode((width,height))
-
-                                            # importer, changer la taille et charger l'arriere plan
-                                            back = pygame.image.load('image1.jpg')
-                                            background =pygame.transform.scale(back,(width,height))
 
                                             # charger le game
                                             game = Game()
@@ -1417,15 +1450,15 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                             pygame.draw.rect(fenetreprop,color_red,[774,190,326,550])
 
                             # Affichage des noms des catégories
-                            fenetreprop.blit(domicile , (160,200))
-                            fenetreprop.blit(transport , (500,200))
-                            fenetreprop.blit(animal , (860,200))
+                            fenetreprop.blit(domicile1 , (160,200))
+                            fenetreprop.blit(transport1 , (500,200))
+                            fenetreprop.blit(animal1 , (860,200))
 
                             # Contenu des catégories
                             # Domicile
                             if choixdomicile==[]:
                                 fenetreprop.blit(aucun , (95,400))
-                                fenetreprop.blit(domicile1 , (170,450))
+                                fenetreprop.blit(domicile2 , (170,450))
                             else:
                                 b=265
                                 for i in range (len(choixdomicile)):
@@ -1438,12 +1471,12 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                             else:
                                 pygame.draw.rect(fenetreprop,color_bred,[100,625,286,100])
                             fenetreprop.blit(acheter , (150,625))
-                            fenetreprop.blit(domicile1 , (170,675))
+                            fenetreprop.blit(domicile2 , (170,675))
 
                             # Transport
                             if choixtransport==[]:
                                 fenetreprop.blit(aucun , (445,400))
-                                fenetreprop.blit(transport1 , (510,450))
+                                fenetreprop.blit(transport2 , (510,450))
                             else:
                                 c=265
                                 for i in range (len(choixtransport)):
@@ -1460,7 +1493,7 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                             # Animal
                             if choixanimal==[]:
                                 fenetreprop.blit(aucun , (790,400))
-                                fenetreprop.blit(animal1 , (880,450))
+                                fenetreprop.blit(animal2 , (880,450))
                             else:
                                 d=265
                                 for i in range (len(choixanimal)):
@@ -1573,64 +1606,64 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                                             if event.type == pygame.MOUSEBUTTONDOWN:
                                                 #1
                                                 if 50 <= mouse[0] <= 200+50 and 115 <= mouse[1] <= 120+115:
-                                                    levoyage(0,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(0,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #2
                                                 if 275 <= mouse[0] <= 200+275 and 115 <= mouse[1] <= 120+115:
-                                                    levoyage(1,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(1,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #3
                                                 if 500 <= mouse[0] <= 200+500 and 115 <= mouse[1] <= 120+115:
-                                                    levoyage(2,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(2,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #4
                                                 if 725 <= mouse[0] <= 200+725 and 115 <= mouse[1] <= 120+115:
-                                                    levoyage(3,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(3,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #5
                                                 if 950 <= mouse[0] <= 200+950 and 115 <= mouse[1] <= 120+115:
-                                                    levoyage(4,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(4,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #6
                                                 if 50 <= mouse[0] <= 200+50 and 265 <= mouse[1] <= 120+265:
-                                                    levoyage(5,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(5,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #7
                                                 if 275 <= mouse[0] <= 200+275 and 265 <= mouse[1] <= 120+265:
-                                                    levoyage(6,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(6,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #8
                                                 if 500 <= mouse[0] <= 200+500 and 265 <= mouse[1] <= 120+265:
-                                                    levoyage(7,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(7,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #9
                                                 if 725 <= mouse[0] <= 200+725 and 265 <= mouse[1] <= 120+265:
-                                                    levoyage(8,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(8,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #10
                                                 if 950 <= mouse[0] <= 200+950 and 265 <= mouse[1] <= 120+265:
-                                                    levoyage(9,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(9,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #11
                                                 if 50 <= mouse[0] <= 200+50 and 415 <= mouse[1] <= 120+415:
-                                                    levoyage(10,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(10,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #12
                                                 if 275 <= mouse[0] <= 200+275 and 415 <= mouse[1] <= 120+415:
-                                                    levoyage(11,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(11,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #13
                                                 if 500 <= mouse[0] <= 200+500 and 415 <= mouse[1] <= 120+415:
-                                                    levoyage(12,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(12,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #14
                                                 if 725 <= mouse[0] <= 200+725 and 415 <= mouse[1] <= 120+415:
-                                                    levoyage(13,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(13,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #15
                                                 if 950 <= mouse[0] <= 200+950 and 415 <= mouse[1] <= 120+415:
-                                                    levoyage(14,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(14,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #16
                                                 if 50 <= mouse[0] <= 200+50 and 565 <= mouse[1] <= 120+565:
-                                                    levoyage(15,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(15,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #17
                                                 if 275 <= mouse[0] <= 200+275 and 565 <= mouse[1] <= 120+565:
-                                                    levoyage(16,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(16,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #18
                                                 if 500 <= mouse[0] <= 200+500 and 565 <= mouse[1] <= 120+565:
-                                                    levoyage(17,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(17,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #19
                                                 if 725 <= mouse[0] <= 200+725 and 565 <= mouse[1] <= 120+565:
-                                                    levoyage(18,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(18,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
                                                 #20
                                                 if 950 <= mouse[0] <= 200+950 and 565 <= mouse[1] <= 120+565:
-                                                    levoyage(19,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal,0,0,0,0,0)
+                                                    levoyage(19,sexe,perso,nom,variableage,variableargent,salaire,nomlycee,choix,choixmetier,choixdomicile,choixtransport,choixanimal)
 
 
 ## Bouton age
@@ -1687,6 +1720,7 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                     else:
                         terminer= True
 
+
                     # Affichage de l'écran de fin
                     while terminer:
                         pygame.display.update()
@@ -1697,9 +1731,9 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                         termine = bigfont.render("Vous avez atteint 100 ans, le jeu est terminé!" , True , color)
                         nomtermine = smallfont.render('Nom: '+ nom , True , color)
                         agetermine = smallfont.render('Age : '+str(variableage), True , color)
-                        domicile2 = smallfont.render('Domicile :' , True , color)
-                        transport2 = smallfont.render('Transport :' , True , color)
-                        animal2 = smallfont.render('Animal :' , True , color)
+                        domicile3 = smallfont.render('Domicile :' , True , color)
+                        transport3 = smallfont.render('Transport :' , True , color)
+                        animal3 = smallfont.render('Animal :' , True , color)
                         if 9999 < variableargent < 1000000:
                             arrondi = round(variableargent/1000, 1)
                             argenttermine2 = str(arrondi)+" K "+"€"
@@ -1718,9 +1752,9 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                         # Domicile
                         if choixdomicile==[]:
                             fenetretermine.blit(aucun , (60,350))
-                            fenetretermine.blit(domicile1 , (360,350))
+                            fenetretermine.blit(domicile2 , (360,350))
                         else:
-                            fenetretermine.blit(domicile2 , (60,325))
+                            fenetretermine.blit(domicile3 , (60,325))
                             b=310
                             bb=325
                             for i in range (len(choixdomicile)):
@@ -1735,9 +1769,9 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                         # Transport
                         if choixtransport==[]:
                             fenetretermine.blit(aucun , (60,475))
-                            fenetretermine.blit(transport1 , (360,475))
+                            fenetretermine.blit(transport2 , (360,475))
                         else:
-                            fenetretermine.blit(transport2 , (60,450))
+                            fenetretermine.blit(transport3 , (60,450))
                             c=310
                             cc=450
                             for i in range (len(choixtransport)):
@@ -1752,9 +1786,9 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
                         # Animal
                         if choixanimal==[]:
                             fenetretermine.blit(aucun , (60,600))
-                            fenetretermine.blit(animal1 , (360,600))
+                            fenetretermine.blit(animal2 , (360,600))
                         else:
-                            fenetretermine.blit(animal2 , (60,575))
+                            fenetretermine.blit(animal3 , (60,575))
                             d=310
                             dd=575
                             for i in range (len(choixanimal)):
@@ -1854,33 +1888,9 @@ def principal(sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,domicile,tra
         pygame.display.flip()
 
 
-## Fonction du début du jeu (premier menu)
-
-# Code pour le menu du départ en utilisant la bibliothèque pygame_menu
-def depart():
-    pygame.mixer.init()
-    pygame.mixer.music.load(song1)
-    pygame.mixer.music.set_volume(0.1)
-    pygame.mixer.music.play(-1)
-    menu = pygame_menu.Menu(800, 1200, 'ONLIFE',theme=mytheme)
-    logo= menu.add_image('icon.png')
-    menu.add_button('Jouer', sexe)
-    menu.add_button('Guide', option_the_game)
-    menu.add_button('Quitter', pygame_menu.events.EXIT)
-    menu.mainloop(fenetre)
-
-
 ## Faire tourner le jeu
-
+# Initialisation de pygame et de la musique
+pygame.init()
+pygame.mixer.init()
 # Commencer et faire tourner le jeu
 depart()
-
-
-# Code pour pouvoir fermer la page et pour la rafraichir
-continuer = True
-while continuer:
-    for event in pygame.event.get():    #Attente des événements
-        if event.type == QUIT:
-            continuer = False
-    #Rafraichissement
-    pygame.display.flip()
