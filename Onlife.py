@@ -92,7 +92,7 @@ bannermiddle=pygame.transform.scale(bannermiddle2,(465,200))
 traveling1=pygame.image.load('traveling.jpeg')
 traveling=pygame.transform.scale(traveling1,(550,580))
 
-# Images des pays
+# Images des drapeaux
 france1=pygame.image.load('france.png')
 france=pygame.transform.scale(france1,(200,120))
 espagne1=pygame.image.load('espagne.png')
@@ -134,6 +134,49 @@ australia=pygame.transform.scale(australia1,(200,120))
 austria1=pygame.image.load('austria.png')
 austria=pygame.transform.scale(austria1,(200,120))
 
+# Images des pays
+photofrance1=pygame.image.load('photofrance.jpg')
+photofrance=pygame.transform.scale(photofrance1,(1100,700))
+photoespagne1=pygame.image.load('photoespagne.jpg')
+photoespagne=pygame.transform.scale(photoespagne1,(1100,700))
+photoetatsunis1=pygame.image.load('photoetatsunis.jpg')
+photoetatsunis=pygame.transform.scale(photoetatsunis1,(1100,700))
+photoitalie1=pygame.image.load('photoitalie.jpg')
+photoitalie=pygame.transform.scale(photoitalie1,(1100,700))
+photomexique1=pygame.image.load('photomexique.jpg')
+photomexique=pygame.transform.scale(photomexique1,(1100,700))
+photoallemagne1=pygame.image.load('photoallemagne.jpg')
+photoallemagne=pygame.transform.scale(photoallemagne1,(1100,700))
+photothailande1=pygame.image.load('photothailande.jpg')
+photothailande=pygame.transform.scale(photothailande1,(1100,700))
+photonouvellezelande1=pygame.image.load('photonouvellezelande.jpg')
+photonouvellezelande=pygame.transform.scale(photonouvellezelande1,(1100,700))
+photoangleterre1=pygame.image.load('photoangleterre.jpg')
+photoangleterre=pygame.transform.scale(photoangleterre1,(1100,700))
+photojapon1=pygame.image.load('photojapon.jpg')
+photojapon=pygame.transform.scale(photojapon1,(1100,700))
+photogrece1=pygame.image.load('photogrece.jpg')
+photogrece=pygame.transform.scale(photogrece1,(1100,700))
+photochine1=pygame.image.load('photochine.jpg')
+photochine=pygame.transform.scale(photochine1,(1100,700))
+photomalaisie1=pygame.image.load('photomalaisie.jpg')
+photomalaisie=pygame.transform.scale(photomalaisie1,(1100,700))
+photorussie1=pygame.image.load('photorussie.jpg')
+photorussie=pygame.transform.scale(photorussie1,(1100,700))
+photoportugal1=pygame.image.load('photoportugal.jpg')
+photoportugal=pygame.transform.scale(photoportugal1,(1100,700))
+photocanada1=pygame.image.load('photocanada.jpg')
+photocanada=pygame.transform.scale(photocanada1,(1100,700))
+photopologne1=pygame.image.load('photopologne.jpg')
+photopologne=pygame.transform.scale(photopologne1,(1100,700))
+photopaysbas1=pygame.image.load('photopaysbas.jpg')
+photopaysbas=pygame.transform.scale(photopaysbas1,(1100,700))
+photoaustralie1=pygame.image.load('photoaustralie.jpg')
+photoaustralie=pygame.transform.scale(photoaustralie1,(1100,700))
+photoautriche1=pygame.image.load('photoautriche.jpg')
+photoautriche=pygame.transform.scale(photoautriche1,(1100,700))
+
+
 # Listes vides pour contenir le choix du domicile, du transport et des animaux de compagnie
 choixdomicile=[]
 choixtransport=[]
@@ -160,6 +203,9 @@ listedomicile=[["Studio - 1",98],["Studio - 2",127],["Studio - 3",75],["Studio -
 listetransport=[["Vélo - 1",1.75],["Vélo - 2",4.6],["Moto - 1",5.9],["Moto - 2",10.3],["Berline - 1",15.5],["Berline - 2",22.3],["Break - 1",16.6],["Break - 2",19.2],["Monospace - 1",23.6],["Monospace - 2",28.1],["Citadines - 1",16.2],["Citadines - 2",22.9],["4x4 - 1",29],["4x4 - 2",31.8],["Limousine - 1",47],["Limousine - 2",72],["Bateau - 1",159],["Bateau - 2",385],["Jet Privé - 1",2950],["Jet Privé - 2",5000]]
 listeanimal=[["Chien - 1",1],["Chien - 2",1.5],["Chat - 1",1],["Chat - 2",1.25],["Poisson - 1",0.15],["Poisson - 2",0.25],["Furet - 1",2.5],["Furet - 2",3.25],["Cheval - 1",6],["Cheval - 2",9.75],["Lapin - 1",3.5],["Lapin - 2",4.45],["Hamster - 1",1.7],["Hamster - 2",2.25],["Oiseau - 1",5.25],["Oiseau - 2",8.75],["Poule - 1",0.2],["Poule - 2",0.5],["Cochon - 1",3.75],["Cochon - 2",6.5]]
 
+# Liste des images de pays
+photopays = [photofrance,photoespagne,photoetatsunis,photoitalie,photomexique,photoallemagne,photothailande,photonouvellezelande,photoangleterre,photojapon,photogrece,photochine,photomalaisie,photorussie,photoportugal,photocanada,photopologne,photopaysbas,photoaustralie,photoautriche]
+
 # Fichier csv des pays
 file=open("voyage.csv","r",encoding='UTF-8-sig') #On ouvre le fichier
 optionsvoyage=file.readline().rstrip().split(';') # On lit la première ligne, on enlève le \n, on découpe à chaque ; et on met le résultat dans optionsvoyage
@@ -169,6 +215,9 @@ for ligne in lignes : # On itère la variable ligne sur chaque élément de lign
     liste=ligne.rstrip().split(';') # On crée la liste sans retour à la ligne
     contenuvoyage.append(liste) # On ajoute la liste obtenue à contenuvoyage
 file.close() # On ferme le fichier
+#On ajoute l'image des pays
+for i in range (20):
+    contenuvoyage[i].append(photopays[i])
 
 # Variables
 sexe = 0 # Variable pour le sexe choisis
@@ -180,6 +229,7 @@ choixmetier="" # Variable du choix du métier
 #Musique
 song1 = "bensound-onceagain.mp3"
 song2 = "musiquedefond.mp3"
+song3 = "musiquedefondvoyage.mp3"
 
 
 ## Fonction du début du jeu (premier menu)
@@ -931,8 +981,37 @@ def levoyage(pays,sexe,perso,nom,age,argent,salaire,nomlycee,spe,metier,choixdom
                                         if variableargent < voyageprix:
                                             erreurargent=1
                                         else:
-                                            variableargent=variableargent-voyageprix # Soustrait le prix du voyage à la somme d'argent
-                                            principal(sexe,perso,nom,age,variableargent,salaire,nomlycee,spe,metier,choixdomicile,choixtransport,choixanimaux) # Retour au jeu
+                                            #Mise en place de la musique
+                                            pygame.mixer.init()
+                                            pygame.mixer.music.load(song3)
+                                            pygame.mixer.music.set_volume(0.05)
+                                            pygame.mixer.music.play(1)
+                                            photodupays=True
+                                            while photodupays:
+                                                # Mise en place de l'affichage de la fenêtre
+                                                pygame.display.update()
+                                                fenetrevoyage = pygame.display.set_mode((width,height))
+                                                fenetrevoyage.fill(background_colour)
+                                                # Détection de la position de la souris
+                                                mouse = pygame.mouse.get_pos()
+                                                # Création du texte pour la page
+                                                finduvoyage = smallfont.render("Fin du voyage" , True , color) # Création du texte
+                                                # Photo du pays
+                                                fenetrevoyage.blit(contenuvoyage[pays][22] , (50,50))
+                                                # Fin du voyage
+                                                if 450 <= mouse[0] <= 300+450 and 600 <= mouse[1] <= 100+600:
+                                                    pygame.draw.rect(fenetrevoyage,color_blue,[450,600,300,100])
+                                                else:
+                                                    pygame.draw.rect(fenetrevoyage,color_navy,[450,600,300,100])
+                                                fenetrevoyage.blit(finduvoyage , (490,625))
+
+                                                # Détection d'événements
+                                                for event in pygame.event.get():   # On parcours la liste de tous les événements reçus
+                                                    # Vérifie si la souris est cliquée
+                                                    if event.type == pygame.MOUSEBUTTONDOWN:
+                                                        if 500 <= mouse[0] <= 200+500 and 600 <= mouse[1] <= 100+600:
+                                                            variableargent=variableargent-voyageprix # Soustrait le prix du voyage à la somme d'argent
+                                                            principal(sexe,perso,nom,age,variableargent,salaire,nomlycee,spe,metier,choixdomicile,choixtransport,choixanimaux) # Retour au jeu
 
 
 ## Fonction du sexe
